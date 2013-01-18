@@ -86,7 +86,7 @@ var vipGuests = getVipGuests(guestNames[2], guestNames[0]);
 guestNames    = inviteBossIfNotInParty(guestNames.length, guestNames);
 
 console.log((oneTable ? 'You can all fit at one table!' : 'You cannot fit at one table'));
-console.log('You initially have ' + seatCount + ' seats occupied');
+console.log('You initially had ' + seatCount + ' seats occupied');
 console.log('Your VIP Guests are ' + vipGuests);
 console.log('Your full dining party consists of ' + guestNames.join(' and ') + '. Woo hoo!');
 
