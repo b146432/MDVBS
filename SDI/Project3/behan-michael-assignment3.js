@@ -148,12 +148,13 @@ var Itinerary = function() {
 };
 
 var i = new Itinerary();
-var favorite = i.getFavoritePark();
-var location2 = i.getFastPassLocation(1);
-var count = i.getFastPassCount();
+
 console.log('Itinerary has data', i.getHasData())
 i.init(json);
 console.log('Itinerary has data', i.getHasData())
+var favorite = i.getFavoritePark();
+var location2 = i.getFastPassLocation(1);
+var count = i.getFastPassCount();
 i.list();
 i.setFavoritePark('Magic Kingdom');
 console.log('Parks: ')
