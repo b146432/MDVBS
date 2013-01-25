@@ -103,8 +103,32 @@ var Itinerary = function() {
         }
     }
 
-    function getFastPass(number) {
-        return fastPasses[number] || 'Not Found';
+    function getFastPassLocation(number) {
+        if (fastPasses[number]) {
+            if (fastPasses[number].location) {
+                return fastPasses[number].location;
+            }
+        } else {
+            console.log('Fastpass ' + number + ' not found');
+            return null;
+        }
+    }
+
+    function getFastpass(number) {
+        return fastPasses[number];
+    }
+
+    function listParks() {
+        var i = 0;
+
+        while (parks[i]) {
+            console.log("\t"+ parks[i]);
+            i++;
+        }
+    }
+
+    function getFastPassCount() {
+        return fastPassCount || fastPasses.length;
     }
 
     return {
@@ -115,20 +139,27 @@ var Itinerary = function() {
         setFavoritePark: setFavoritePark,
         favoritePark: favoritePark,
         list: list,
-        getFastPass: getFastPass,
-        getFavoritePark: getFavoritePark
+        getFastPassLocation: getFastPassLocation,
+        getFavoritePark: getFavoritePark,
+        listParks: listParks,
+        getFastPassCount: getFastPassCount,
+        getFastpass: getFastpass
     };
 };
 
 var i = new Itinerary();
+var favorite = i.getFavoritePark();
+var location2 = i.getFastPassLocation(1);
+var count = i.getFastPassCount();
 console.log('Itinerary has data', i.getHasData())
 i.init(json);
 console.log('Itinerary has data', i.getHasData())
 i.list();
 i.setFavoritePark('Magic Kingdom');
-var favorite = i.getFavoritePark();
-var fastPass2 = i.getFastPass(1);
-
+console.log('Parks: ')
+i.listParks()
+console.log('Number of fast passes: ' + count);
 console.log('Favorite Park: ', favorite);
-console.log('Second FastPass Location: ', fastPass2.location);
+console.log('Second FastPass Location: ', location2);
+console.log('First Fast Pass', i.getFastpass(0));
 
