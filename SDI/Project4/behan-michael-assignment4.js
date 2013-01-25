@@ -26,3 +26,28 @@ String.prototype.validPhone = function () {
     return true;
 };
 
+
+// Test string for valid email address.
+// Returns: boolean
+String.prototype.validEmail = function() {
+    var userAndHost = this.split('@');
+
+    if (userAndHost.length !== 2) {
+        return false;
+    }
+
+    var user = userAndHost[0],
+        host = userAndHost[1];
+
+
+    var hostAndTld = host.split('.');
+
+    if (hostAndTld.length !== 2) {
+        return false;
+    }
+
+    var tld = hostAndTld[1];
+
+
+    return ((user.length > 0) && (host.length > 0) && (tld.length > 1));
+};
