@@ -86,7 +86,7 @@ var titleCase = function(str) {
         len             = words.length;
 
     for (var i = 0; i < len; i++) {
-        words[i] = words[i].substr(0, 1).toUpperCase() + words[i].substr(1, words[i].length);
+        words[i] = words[i].substr(0, 1).toUpperCase() + words[i].substr(1, words[i].length).toLowerCase();
     }
 
     return words.join(' ');
@@ -109,4 +109,3 @@ var swapSeparators = function(str, currentSeperator, newSeparator) {
 var toInteger = function(str) {
     return parseInt(str, 10);
 };
-

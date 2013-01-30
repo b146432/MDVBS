@@ -41,3 +41,18 @@ var sumOfNumbersInArray = function(arr) {
 
     return sum;
 };
+
+
+// Sorts an array of objects based on the value of a key
+// in each of the objects.
+// @param arr - Array
+// @param key - Key name to look for in each object of the array.
+// Returns: sorted array as described above.
+// Note: the value of each key must be numeric
+var sortArrayOfObjectsByKey = function(arr, key) {
+    var sortCallback = function(a, b) {
+        return (a[key] - b[key]);
+    };
+
+    return arr.sort(sortCallback);
+};
