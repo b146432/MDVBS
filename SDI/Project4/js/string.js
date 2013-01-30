@@ -1,3 +1,9 @@
+// SDI 1301 Project 4
+// Michael Behan
+// string.js - String library functions.
+
+
+
 // Test string for valid US phone number (10 digit with hyphens)i
 // e.g.:  407-555-1212
 // Returns: boolean
@@ -26,6 +32,7 @@ String.prototype.validPhone = function () {
     return true;
 };
 
+
 // Test string for valid email address.
 // Returns: boolean
 String.prototype.validEmail = function() {
@@ -37,7 +44,6 @@ String.prototype.validEmail = function() {
 
     var user = userAndHost[0],
         host = userAndHost[1];
-
 
     var hostAndTld = host.split('.');
 
@@ -71,11 +77,11 @@ String.prototype.isValidUrl = function() {
 
 
 // Title Case a string of words
-// Returns: String with each word having the first letter capitalized.
+// Returns: String with each word having its first letter capitalized.
 String.prototype.titleCase = function() {
-    var words = this.split(' '),
+    var words           = this.split(' '),
         titleCasedWords = [],
-        len = words.length;
+        len             = words.length;
 
     for (var i = 0; i < len; i++) {
         words[i] = words[i].substr(0, 1).toUpperCase() + words[i].substr(1, words[i].length);
@@ -83,6 +89,7 @@ String.prototype.titleCase = function() {
 
     return words.join(' ');
 };
+
 
 // Swap string separators
 // @param currentSeparator (character currently separating characters of the string)
@@ -92,4 +99,10 @@ String.prototype.swapSeparators = function(currentSeperator, newSeparator) {
     return this.split(currentSeperator).join(newSeparator);
 };
 
+
+// Convert string to integer
+// Returns: number or NaN if string is not parsable.
+String.prototype.toInteger = function() {
+    return parseInt(this, 10);
+};
 
