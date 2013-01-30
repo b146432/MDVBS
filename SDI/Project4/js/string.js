@@ -3,12 +3,11 @@
 // string.js - String library functions.
 
 
-
 // Test string for valid US phone number (10 digit with hyphens)i
-// e.g.:  407-555-1212
+// @param str - String e.g.:  407-555-1212
 // Returns: boolean
-String.prototype.validPhone = function () {
-    var selfAsArray = this.split('-');
+var validPhone = function(str) {
+    var selfAsArray = str.split('-');
 
     if (selfAsArray.length !== 3) {
         return false;
@@ -34,9 +33,10 @@ String.prototype.validPhone = function () {
 
 
 // Test string for valid email address.
+// @param str - String (email address)
 // Returns: boolean
-String.prototype.validEmail = function() {
-    var userAndHost = this.split('@');
+var validEmail = function(str) {
+    var userAndHost = str.split('@');
 
     if (userAndHost.length !== 2) {
         return false;
@@ -58,9 +58,10 @@ String.prototype.validEmail = function() {
 
 
 // Test string for valid URL
+// @param url - String
 // Returns: boolean
-String.prototype.isValidUrl = function() {
-    var pieces = this.split(':');
+var isValidUrl = function(url) {
+    var pieces = url.split(':');
 
     if (pieces.length !== 2) {
         return false;
@@ -76,10 +77,11 @@ String.prototype.isValidUrl = function() {
 };
 
 
-// Title Case a string of words
+// Title Case a string of
+// @param: str - String of words separated by spaces
 // Returns: String with each word having its first letter capitalized.
-String.prototype.titleCase = function() {
-    var words           = this.split(' '),
+var titleCase = function(str) {
+    var words           = str.split(' '),
         titleCasedWords = [],
         len             = words.length;
 
@@ -92,17 +94,19 @@ String.prototype.titleCase = function() {
 
 
 // Swap string separators
-// @param currentSeparator (character currently separating characters of the string)
-// @param newSeperator (new character seperator to replace the current one with)
+// @param str              - String
+// @param currentSeparator - String (character currently separating characters of the string)
+// @param newSeperator     - string (new character seperator to replace the current one with)
 // Returns: String
-String.prototype.swapSeparators = function(currentSeperator, newSeparator) {
-    return this.split(currentSeperator).join(newSeparator);
+var swapSeparators = function(str, currentSeperator, newSeparator) {
+    return str.split(currentSeperator).join(newSeparator);
 };
 
 
 // Convert string to integer
-// Returns: number or NaN if string is not parsable.
-String.prototype.toInteger = function() {
-    return parseInt(this, 10);
+// @param str - String (number as a String)
+// Returns: number (log10) or NaN if string is not parsable.
+var toInteger = function(str) {
+    return parseInt(str, 10);
 };
 
