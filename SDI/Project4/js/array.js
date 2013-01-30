@@ -9,7 +9,7 @@
 // Returns: number or null if none found
 var numberInArraySmallerThan = function (arr, number) {
     var arr2         = [],
-        sortCallback = function(a,b) { return (a - b); }; // sort ascending
+        sortCallback = function(a, b) { return (a - b); }; // sort ascending
 
     arr = arr.sort(sortCallback);
 
