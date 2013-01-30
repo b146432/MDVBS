@@ -1,30 +1,7 @@
-// Chain method courtesy of
-// http://webreflection.blogspot.com/2010/02/javascript-override-patterns.html
-var chain = (function () {
-    // recycled empty callback
-    // used to avoid constructors execution
-    // while extending
-    function __proto__() {}
-
-    // chain function
-    return function ($prototype) {
-        // associate the object/prototype
-        // to the __proto__.prototype
-        __proto__.prototype = $prototype;
-        // and create a chain
-        return new __proto__;
-    };
-}());
-
-
-function FSString(){};
-FSString.prototype = chain(String.prototype);
-
-
 // Test string for valid US phone number (10 digit with hyphens)i
 // e.g.:  407-555-1212
 // Returns: boolean
-FSString.prototype.validPhone = function () {
+String.prototype.validPhone = function () {
     var selfAsArray = this.split('-');
 
     if (selfAsArray.length !== 3) {
@@ -32,7 +9,7 @@ FSString.prototype.validPhone = function () {
     }
 
     function validSegment(segment, expectedLength) {
-        if (segment && !isNaN(segment) && segment.toFSString().length === expectedLength) {
+        if (segment && !isNaN(segment) && segment.toString().length === expectedLength) {
           return true;
         }
         return false;
@@ -49,10 +26,9 @@ FSString.prototype.validPhone = function () {
     return true;
 };
 
-
 // Test string for valid email address.
 // Returns: boolean
-FSString.prototype.validEmail = function() {
+String.prototype.validEmail = function() {
     var userAndHost = this.split('@');
 
     if (userAndHost.length !== 2) {
@@ -71,14 +47,13 @@ FSString.prototype.validEmail = function() {
 
     var tld = hostAndTld[1];
 
-
     return ((user.length > 0) && (host.length > 0) && (tld.length > 1));
 };
 
 
 // Test string for valid URL
 // Returns: boolean
-FSString.prototype.isValidUrl = function() {
+String.prototype.isValidUrl = function() {
     var pieces = this.split(':');
 
     if (pieces.length !== 2) {
@@ -95,32 +70,26 @@ FSString.prototype.isValidUrl = function() {
 };
 
 
-// Title Case a string.
-// Returns: FSString
-FSString.prototype.titleCase = function() {
+// Title Case a string of words
+// Returns: String with each word having the first letter capitalized.
+String.prototype.titleCase = function() {
     var words = this.split(' '),
-        titleCasedWords = [];
+        titleCasedWords = [],
+        len = words.length;
 
-
-    for (var i = 0, len = words.length; i < len; i++) {
-        var word  = words[i];
-        var word2 = '';
-
-        for (var j = 0, len2 = word.length; j < len2; j++) {
-            if (j === 0) {
-                word2[j] = word[j].toUpperCase();
-            } else {
-                word2[j] = word[j].toLowerCase();
-            }
-        }
-
-        console.log(word2);
-
-        titleCasedWords.push(word2);
+    for (var i = 0; i < len; i++) {
+        words[i] = words[i].substr(0, 1).toUpperCase() + words[i].substr(1, words[i].length);
     }
 
-    return titleCasedWords.join(' ');
+    return words.join(' ');
 };
 
+// Swap string separators
+// @param currentSeparator (character currently separating characters of the string)
+// @param newSeperator (new character seperator to replace the current one with)
+// Returns: String
+String.prototype.swapSeparators = function(currentSeperator, newSeparator) {
+    return this.split(currentSeperator).join(newSeparator);
+};
 
 
