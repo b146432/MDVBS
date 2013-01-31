@@ -25,7 +25,7 @@ var fuzzy = function(number, number2, percent) {
         return false;
     }
 
-    var fuzziness = (number / xnumber2) * 100;
+    var fuzziness = (number / number2) * 100;
 
     if (number === number2) {
         console.log(number + ' is equal to ' + number2 + ' and therefore has a fuzzy factor of ' + fuzziness + '%');
