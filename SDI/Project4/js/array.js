@@ -3,6 +3,7 @@
 // array.js - Array library functions.
 
 
+
 // Returns the smallest number in an array that is greater than the supplied number.
 // @param arr    - Array of numbers
 // @param number - The number to check
@@ -48,7 +49,7 @@ var sumOfNumbersInArray = function(arr) {
 // @param arr - Array
 // @param key - Key name to look for in each object of the array.
 // Returns: sorted array as described above.
-// Note: the value of each key must be numeric
+// Note: the value of each key must be numeric (type number)
 var sortArrayOfObjectsByKey = function(arr, key) {
     var sortCallback = function(a, b) {
         return (a[key] - b[key]);

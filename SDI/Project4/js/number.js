@@ -3,6 +3,7 @@
 // number.js - Number library functions.
 
 
+
 // Show a number with the specified amount of decimal places
 // @param number        - Floating point number
 // @param decimalPlaces - Number of decimal places to show
@@ -24,10 +25,10 @@ var fuzzy = function(number, number2, percent) {
         return false;
     }
 
-    var fuzziness = (number/number2) * 100;
+    var fuzziness = (number / xnumber2) * 100;
 
     if (number === number2) {
-        console.log(number + ' is equal to ' + number2 + ' and is therefore has a fuzzy factor of ' + fuzziness + '%');
+        console.log(number + ' is equal to ' + number2 + ' and therefore has a fuzzy factor of ' + fuzziness + '%');
     } else if (number < number2) {
         console.log(number + ' is less than ' + number2 + ' and has a fuzziness factor of ' + fuzziness + '%');
     } else {
