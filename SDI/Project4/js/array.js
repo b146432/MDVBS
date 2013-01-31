@@ -57,3 +57,4 @@ var sortArrayOfObjectsByKey = function(arr, key) {
 
     return arr.sort(sortCallback);
 };
+
