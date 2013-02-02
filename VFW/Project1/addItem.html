@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--
+    Cheat Codes
+    Michael Behan 1302
+    VFW Project 1
+-->
+<html>
+<head>
+    <title>Cheat Codes</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <header>
+        <h1>Add Cheat Code</h1>
+    </header>
+
+    <form method="post" action="#">
+        <fieldset>
+            <legend>All fields are required.</legend>
+            <ul><!-- begin form elements -->
+                <li>
+                    <label for="category">Category:</label>
+                    <select id="category" name="category">
+                        <option selected value="cheat-code">Cheat Code</option>
+                        <option value="secret">Secret</option>
+                        <option value="Glitch">Glitch</option>
+                    </select>
+                </li>
+                <li>
+                    <label for="systems">System(s):</label>
+                    <select multiple id="systems" name="systems">
+                        <option value="xbox">XBox</option>
+                        <option value="ps3">PS3</option>
+                        <option value="pc">PC</option>
+                        <option value="wii">Wii</option>
+                        <option value="wiiu">Wii U</option>
+                    </select>
+                </li>
+
+                <li>
+                    <label for="code">Code:</label>
+                    <input type="text" id="code" name="code">
+                </li>
+
+                <li>
+                    <label for="author">Author Name:</label>
+                    <input type="text" id="author" name="author">
+                </li>
+
+                <li>
+                    <label for="ease">Ease of reproduction:</label>
+                    <input type="range" name="range" id="ease" min="1" max="100">
+                </li>
+
+                <li>
+                    <label for="thorough">Tested Thoroughly</label>
+                    <input type="checkbox" id="thorough" name="thorough">
+                </li>
+
+                <li>
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description"></textarea>
+                </li>
+                <li>
+                    <label for="createdOn">Date Found:</label>
+                    <input id="createdOn" type="date" name="createdOn">
+                </li>
+            </ul>
+            <input type="submit" value="Submit">
+        </fieldset>
+    </form>
+
+    <footer>
+        [&nbsp;<a href="#">Clear Stored Data</a>&nbsp;
+        | &nbsp;<a href="#">Clear Display Data</a>&nbsp;]
+    </footer>
+</body>
+</html>

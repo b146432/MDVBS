@@ -1,3 +1,3 @@
 Michael Behan's github for Visual Frameworks:
 
-https://github.com/b146432/MDVBS/tree/master/VF
+https://github.com/b146432/MDVBS/tree/master/VFW
