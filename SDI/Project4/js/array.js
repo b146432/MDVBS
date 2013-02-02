@@ -58,3 +58,15 @@ var sortArrayOfObjectsByKey = function(arr, key) {
     return arr.sort(sortCallback);
 };
 
+var a = {key: 5},
+    b = {key: 17},
+    c = {key: 28},
+    d = {key: 2},
+    e = {key: 6};
+
+var objects = [a, b, c, d, e];
+
+objects = sortArrayOfObjectsByKey(objects, 'key');
+
+console.log(objects);
+
