@@ -1,4 +1,4 @@
 Visual Frameworks
 =================
 
-MBDVS - Full Sail
+Mobile Development B.S. - Full Sail
