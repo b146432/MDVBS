@@ -10,24 +10,30 @@
     <meta charset="utf-8">
 </head>
 <body>
-    <header>
-        <h1>Add Cheat Code</h1>
-    </header>
+
+    <h1>Add Cheat Code</h1>
 
     <form method="post" action="#">
         <fieldset>
             <legend>All fields are required.</legend>
-            <ul><!-- begin form elements -->
-                <li>
-                    <label for="category">Category:</label>
+            <!-- begin form elements -->
+            <dl>
+                <dt><label for="game">Game Title:</label></dt>
+                <dd><input type="text" id="game" name="game"></dd>
+            </dl>
+            <dl>
+                <dt><label for="category">Category:</label></dt>
+                <dd>
                     <select id="category" name="category">
                         <option selected value="cheat-code">Cheat Code</option>
                         <option value="secret">Secret</option>
                         <option value="Glitch">Glitch</option>
                     </select>
-                </li>
-                <li>
-                    <label for="systems">System(s):</label>
+                </dd>
+            </dl>
+            <dl>
+                <dt><label for="systems">System(s):</label></dt>
+                <dd>
                     <select multiple id="systems" name="systems">
                         <option value="xbox">XBox</option>
                         <option value="ps3">PS3</option>
@@ -35,38 +41,41 @@
                         <option value="wii">Wii</option>
                         <option value="wiiu">Wii U</option>
                     </select>
-                </li>
+                </dd>
+            </dl>
 
-                <li>
-                    <label for="code">Code:</label>
-                    <input type="text" id="code" name="code">
-                </li>
+            <dl>
+                <dt><label for="code">Code:</label></dt>
+                <dd><input type="text" id="code" name="code"></dd>
+            </dl>
 
-                <li>
-                    <label for="author">Author Name:</label>
-                    <input type="text" id="author" name="author">
-                </li>
+            <dl>
+                <dt><label for="author">Author Name:</label></dt>
+                <dd><input type="text" id="author" name="author"></dd>
+            </dl>
 
-                <li>
-                    <label for="ease">Ease of reproduction:</label>
-                    <input type="range" name="range" id="ease" min="1" max="100">
-                </li>
+            <dl>
+                <dt><label for="ease">Ease of reproduction:</label></dt>
+                <dd><input type="range" name="range" id="ease" min="1" max="100"></dd>
+            </dl>
 
-                <li>
-                    <label for="thorough">Tested Thoroughly</label>
-                    <input type="checkbox" id="thorough" name="thorough">
-                </li>
+            <dl>
+                <dt><label for="thorough">Tested thoroughly?</label></dt>
+                <dd><input type="checkbox" id="thorough" name="thorough"></dd>
+            </dl>
 
-                <li>
-                    <label for="description">Description:</label>
-                    <textarea id="description" name="description"></textarea>
-                </li>
-                <li>
-                    <label for="createdOn">Date Found:</label>
-                    <input id="createdOn" type="date" name="createdOn">
-                </li>
-            </ul>
-            <input type="submit" value="Submit">
+            <dl>
+                <dt><label for="description">Description:</label></dt>
+                <dd><textarea id="description" name="description"></textarea></dd>
+            </dl>
+            <dl>
+                <dt><label for="date">Date Found:</label></dt>
+                <dd><input id="date" type="date" name="createdOn"></dd>
+            </dl>
+            <dl>
+                <dd><input type="submit" value="Submit"></dd>
+            </dl>
+
         </fieldset>
     </form>
 
