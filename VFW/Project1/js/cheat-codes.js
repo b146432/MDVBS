@@ -22,8 +22,7 @@
             $('ease-display').innerHTML = evt.target.value;
         });
 
-        $('cheat-form').addEventListener('submit', function(evt) {
-            evt.preventDefault();
+        $('submit').addEventListener('click', function(evt) {
             var result = storeData();
 
             if (result) {
@@ -103,7 +102,7 @@
 
     // Cycle through cheat codes from localStorage
     // and display them.
-    var getData = function() {
+    var displayStoredData = function() {
         var data    = localStorage.getItem(STORAGE_KEY),
             display = $('display');
 
@@ -153,7 +152,7 @@
 
 
     // Populate the category dropdown
-    var makeCats = function() {
+    var populateCategory = function() {
         var el = $(CATEGORY_ID);
 
         if (el === null) {
@@ -179,8 +178,8 @@
     // Begin execution:
     _setupEvents();
     $('ease-display').innerHTML = $('ease').value;
-    makeCats();
-    getData();
+    populateCategory();
+    displayStoredData();
 
 
 
