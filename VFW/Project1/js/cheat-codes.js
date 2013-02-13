@@ -23,7 +23,7 @@
         });
 
         $('submit').addEventListener('click', function(evt) {
-            var result = storeData();
+            var result = storeCheat();
 
             if (result) {
                 location.reload();
@@ -67,7 +67,7 @@
 
     // Store data from the form and add/append it
     // to the session storage as a JSON string.
-    var storeData = function() {
+    var storeCheat = function() {
         var obj = new CheatCode(),
             i   = 0,
             len = FORM_FIELDS.length;
@@ -100,19 +100,25 @@
     };
 
 
+    // Get data from loal storage
+    var getStoredCheats = function() {
+        var data    = localStorage.getItem(STORAGE_KEY),
+        // reverse data so newest cheats are always on top:
+        data = JSON.parse('[' + data + ']').reverse();
+        return data;
+    };
+
+
     // Cycle through cheat codes from localStorage
     // and display them.
-    var displayStoredData = function() {
-        var data    = localStorage.getItem(STORAGE_KEY),
+    var displayStoredCheats= function() {
+        var data = getStoredChets(),
             display = $('display');
 
         if (!data) {
             display.innerHTML = 'No codes stored';
             return false;
         }
-
-        // reverse data so newest cheats are always on top:
-        data = JSON.parse('[' + data + ']').reverse();
 
         var len = data.length;
 
@@ -179,7 +185,7 @@
     _setupEvents();
     $('ease-display').innerHTML = $('ease').value;
     populateCategory();
-    displayStoredData();
+    displayStoredCheats();
 
 
 
