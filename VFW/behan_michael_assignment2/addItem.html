@@ -30,7 +30,7 @@
             <dl>
                 <!-- Game Title -->
                 <dt><label for="game">Game Title:</label></dt>
-                <dd><input type="text" id="game" name="game"></dd>
+                <dd><input type="text" id="game" name="game" /></dd>
 
                 <!-- Category -->
                 <dt><label for="category">Category:</label></dt>
@@ -54,23 +54,23 @@
 
                 <!-- Cheat Code -->
                 <dt><label for="code">Code:</label></dt>
-                <dd><input type="text" id="code" name="code"></dd>
+                <dd><input type="text" id="code" name="code" /></dd>
 
                 <!-- Author -->
                 <dt><label for="author">Author Name:</label></dt>
-                <dd><input type="text" id="author" name="author"></dd>
+                <dd><input type="text" id="author" name="author" /></dd>
 
                 <!-- Ease of Reproduction -->
                 <dt><label for="ease">Ease of reproduction:</label></dt>
                 <dd>
-                    <input type="range" name="range" id="ease" min="1" max="100">
+                    <input type="range" name="range" id="ease" min="1" max="100" />
                     &nbsp;
                     <span id="ease-display"></span>
                 </dd>
 
                 <!-- Checked Thoroughly? -->
                 <dt><label for="thorough">Tested thoroughly?</label></dt>
-                <dd><input type="checkbox" id="thorough" name="thorough"></dd>
+                <dd><input type="checkbox" id="thorough" name="thorough" /></dd>
 
                 <!-- Full Description -->
                 <dt><label for="description">Description:</label></dt>
@@ -78,16 +78,14 @@
 
                 <!-- Date Found -->
                 <dt><label for="date">Date Found:</label></dt>
-                <dd><input id="date" type="date" name="date"></dd>
+                <dd><input id="date" type="date" name="date" /></dd>
 
-
-                <!-- Save -->
-                <dd><input type="button" id="save" value="Add Cheat"></dd>
             </dl>
+            <input type="button" id="save" value="Add Cheat" />
         </fieldset>
     </form>
 
-
+    <!-- Display Section -->
     <section id="display">
         <header>
             <h3>Cheats:</h3>
@@ -96,11 +94,11 @@
     </section>
 
     <footer>
-        [&nbsp;
+        [
         <a id="clear-storage" href="#" title="Clear data stored in local storage">Clear Stored Data</a>
-        &nbsp; | &nbsp;
+        |
         <a id="clear-display" href="#" title="Clear display of stored data">Clear Display Data</a>
-        &nbsp;]
+        ]
     </footer>
 
     <script type="text/javascript" src="js/main.js"></script>
