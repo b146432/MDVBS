@@ -54,11 +54,30 @@
             location.reload();
         });
 
-        $('clear-display').addEventListener('click', function(evt) {
+        $('display-cheats').addEventListener('click', function(evt) {
             evt.preventDefault();
-            $('display').innerHTML = '';
+            toggleDisplay(evt);
             return false;
         });
+    };
+
+
+    // Toggle between form display and stored
+    // cheat code display.
+    // @param evt - Event passed from handler.
+    var toggleDisplay = function(evt) {
+        var form = $('cheat-form'),
+            display = $('display');
+
+        if (form.style.display === 'none') {
+            form.style.display = 'block';
+            display.style.display = 'none';
+            evt.target.innerHTML = 'Display Cheats';
+        } else {
+            form.style.display = 'none';
+            display.style.display = 'block';
+            evt.target.innerHTML = 'Add Cheat';
+        }
     };
 
 
@@ -151,8 +170,7 @@
             // Loop through each owned property in object,
             // creating markup and appending it to our display element.
             for (var o in data[i]) {
-
-                var dl = document.createElement('dl');
+                dl = document.createElement('dl');
 
                 if (data[i].hasOwnProperty(o)) {
                     var dt = document.createElement('dt'),

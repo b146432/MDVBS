@@ -22,6 +22,22 @@
 
     <h1>Add Cheat Code</h1>
 
+    <nav>
+        <ul>
+            <li><a id="clear-storage" href="#" title="Delete All Stored Cheats">Clear Stored Cheats</a></li>
+            <li><a id="display-cheats" href="#" title="Display Stored Cheats">Display Cheats</a></li>
+        </ul>
+    </nav>
+
+    <!-- Display Section -->
+    <section id="display">
+        <header>
+            <h3>Stored Cheats:</h3>
+        </header>
+        <!-- dynamically populated -->
+    </section>
+
+
     <form id="cheat-form" action="#">
         <fieldset>
             <legend>All fields are required.</legend>
@@ -81,25 +97,10 @@
                 <dd><input id="date" type="date" name="date" /></dd>
 
             </dl>
-            <input type="button" id="save" value="Add Cheat" />
+
+            <button id="save">Add Cheat</button>
         </fieldset>
     </form>
-
-    <!-- Display Section -->
-    <section id="display">
-        <header>
-            <h3>Cheats:</h3>
-        </header>
-        <!-- dynamically populated -->
-    </section>
-
-    <footer>
-        [
-        <a id="clear-storage" href="#" title="Clear data stored in local storage">Clear Stored Data</a>
-        |
-        <a id="clear-display" href="#" title="Clear display of stored data">Clear Display Data</a>
-        ]
-    </footer>
 
     <script type="text/javascript" src="js/main.js"></script>
 </body>
