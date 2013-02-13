@@ -45,6 +45,8 @@
 
             if (result) {
                 location.reload();
+            } else {
+                alert('Please fill in all required fields!');
             }
         });
 
