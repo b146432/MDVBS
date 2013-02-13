@@ -2,21 +2,21 @@
 <!--
     Cheat Codes
     Michael Behan 1302
-    VFW Project 1
+    VFW Project 2
 -->
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="description" content="View and Add Cheat Codes for Video Games">
-    <meta name="keywords" content="cheat codes,codes,games,video games,find cheat">
-    <meta name="author" content="Michael Behan">
-    <meta name="robots" content="index, follow">
-    <meta name="viewport" content="user-scalable=no, width=device-width">
-    <meta name="viewport" content="target-densitydpi=device-dpi">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <title>Add Cheat</title>
-    <link rel="stylesheet" type="text/css" href="css/cheat-codes.css"></link>
+    <meta charset="utf-8" />
+    <meta name="description" content="View and Add Cheat Codes for Video Games" />
+    <meta name="keywords" content="cheat codes,codes,games,video games,find cheat" />
+    <meta name="author" content="Michael Behan" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="user-scalable=no, width=device-width" />
+    <meta name="viewport" content="target-densitydpi=device-dpi" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <title>Cheat Codes &ndash; Add Cheat Code</title>
+    <link rel="stylesheet" href="css/style.css"></link>
 </head>
 <body>
 
@@ -27,22 +27,20 @@
             <legend>All fields are required.</legend>
 
             <!-- begin form elements -->
-
             <dl>
+                <!-- Game Title -->
                 <dt><label for="game">Game Title:</label></dt>
                 <dd><input type="text" id="game" name="game"></dd>
-            </dl>
 
-            <dl>
+                <!-- Category -->
                 <dt><label for="category">Category:</label></dt>
                 <dd>
                     <select id="category" name="category">
                         <!-- dynamically populated -->
                     </select>
                 </dd>
-            </dl>
 
-            <dl>
+                <!-- Affected game systems -->
                 <dt><label for="systems">System(s):</label></dt>
                 <dd>
                     <select multiple id="systems" name="systems">
@@ -53,44 +51,38 @@
                         <option value="wiiu">Wii U</option>
                     </select>
                 </dd>
-            </dl>
 
-            <dl>
+                <!-- Cheat Code -->
                 <dt><label for="code">Code:</label></dt>
                 <dd><input type="text" id="code" name="code"></dd>
-            </dl>
 
-            <dl>
+                <!-- Author -->
                 <dt><label for="author">Author Name:</label></dt>
                 <dd><input type="text" id="author" name="author"></dd>
-            </dl>
 
-            <dl>
+                <!-- Ease of Reproduction -->
                 <dt><label for="ease">Ease of reproduction:</label></dt>
                 <dd>
                     <input type="range" name="range" id="ease" min="1" max="100">
                     &nbsp;
                     <span id="ease-display"></span>
                 </dd>
-            </dl>
 
-            <dl>
+                <!-- Checked Thoroughly? -->
                 <dt><label for="thorough">Tested thoroughly?</label></dt>
                 <dd><input type="checkbox" id="thorough" name="thorough"></dd>
-            </dl>
 
-            <dl>
+                <!-- Full Description -->
                 <dt><label for="description">Description:</label></dt>
                 <dd><textarea id="description" name="description"></textarea></dd>
-            </dl>
 
-            <dl>
+                <!-- Date Found -->
                 <dt><label for="date">Date Found:</label></dt>
                 <dd><input id="date" type="date" name="date"></dd>
-            </dl>
 
-            <dl>
-                <dd><input type="button" id="submit" value="Add Cheat"></dd>
+
+                <!-- Save -->
+                <dd><input type="button" id="save" value="Add Cheat"></dd>
             </dl>
         </fieldset>
     </form>
@@ -108,7 +100,6 @@
         | &nbsp;<a id="clear-display" href="#" title="Clear display of stored data">Clear Display Data</a>&nbsp;]
     </footer>
 
-    <script type="text/javascript" src="js/string.js"></script>
-    <script type="text/javascript" src="js/cheat-codes.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

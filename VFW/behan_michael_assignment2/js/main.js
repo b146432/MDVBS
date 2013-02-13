@@ -1,4 +1,5 @@
 // VFW 1302
+// Project 2
 // Michael Behan
 
 (function() {
@@ -16,13 +17,30 @@
     CheatCode = function() {};
 
 
+    // Title Case a string of words.
+    // @param: str - String of words separated by spaces
+    // Returns: String with each word having its first letter capitalized.
+    // Note: Taken from SDI work.
+    var titleCase = function(str) {
+        var words           = str.split(' '),
+            titleCasedWords = [],
+            len             = words.length;
+
+        for (var i = 0; i < len; i++) {
+            words[i] = words[i].substr(0, 1).toUpperCase()
+                     + words[i].substr(1, words[i].length).toLowerCase();
+        }
+
+        return words.join(' ');
+    };
+
     // Set event bindings for various elements.
     var _setupEvents = function() {
         $('ease').addEventListener('change', function(evt) {
             $('ease-display').innerHTML = evt.target.value;
         });
 
-        $('submit').addEventListener('click', function(evt) {
+        $('save').addEventListener('click', function(evt) {
             var result = storeCheat();
 
             if (result) {
@@ -112,7 +130,7 @@
     // Cycle through cheat codes from localStorage
     // and display them.
     var displayStoredCheats= function() {
-        var data = getStoredChets(),
+        var data = getStoredCheats(),
             display = $('display');
 
         if (!data) {
@@ -186,7 +204,5 @@
     $('ease-display').innerHTML = $('ease').value;
     populateCategory();
     displayStoredCheats();
-
-
 
 })();
