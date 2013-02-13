@@ -9,7 +9,6 @@
             return document.getElementById(id);
         },
         CATEGORY_ID = 'category',
-        STORAGE_KEY = 'cheatcodes',
         // These are the form fields we will loop through.
         // The systems field is not included because it is a special case (multi-select)
         FORM_FIELDS = ['game', 'category', 'code', 'author', 'ease', 'thorough', 'description', 'date'];
@@ -51,7 +50,7 @@
 
         $('clear-storage').addEventListener('click', function(evt) {
             evt.preventDefault();
-            localStorage.removeItem(STORAGE_KEY);
+            localStorage.clear();
             location.reload();
         });
 
@@ -89,7 +88,8 @@
     var storeCheat = function() {
         var obj = new CheatCode(),
             i   = 0,
-            len = FORM_FIELDS.length;
+            len = FORM_FIELDS.length,
+            key = Math.ceil(Math.random()*1000000).toString();
 
         // Loop through form fields and store them
         // into our object.
@@ -107,25 +107,26 @@
         // multi-select box.
         obj.systems = getSelectedSystems();
 
-        codeObjects = localStorage.getItem(STORAGE_KEY) || '';
-        if (codeObjects.length === 0) {
-            codeObjects = JSON.stringify(obj);
-        } else {
-            codeObjects = codeObjects + ',' + JSON.stringify(obj);
-        }
-
-        localStorage.setItem(STORAGE_KEY, codeObjects);
+        localStorage.setItem(key, JSON.stringify(obj));
 
         return true;
     };
 
 
     // Get data from loal storage
+    // @return Array of CheatCode objects
     var getStoredCheats = function() {
-        var data    = localStorage.getItem(STORAGE_KEY),
-        // reverse data so newest cheats are always on top:
-        data = JSON.parse('[' + data + ']').reverse();
-        return data;
+        var i = 0,
+            j = localStorage.length,
+            arr = [];
+
+        for (; i < j; i++) {
+            idx = localStorage.key(i);
+            item = JSON.parse(localStorage.getItem(idx));
+            arr.push(item);
+        }
+
+        return arr;
     };
 
 
