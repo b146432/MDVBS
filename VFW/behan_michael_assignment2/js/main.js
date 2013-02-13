@@ -6,15 +6,15 @@
 
     // Define variables
     var $ = function(id) {
-        return document.getElementById(id);
-    },
-    CATEGORY_ID = 'category',
-    STORAGE_KEY = 'cheatcodes',
-    // These are the form fields we will loop through.
-    // The systems field is not included because it is a special case (multi-select)
-    FORM_FIELDS = ['game', 'category', 'code', 'author', 'ease', 'thorough', 'description', 'date'];
-    categories = ['Cheat Code', 'Secret', 'Glitch'],
-    CheatCode = function() {};
+            return document.getElementById(id);
+        },
+        CATEGORY_ID = 'category',
+        STORAGE_KEY = 'cheatcodes',
+        // These are the form fields we will loop through.
+        // The systems field is not included because it is a special case (multi-select)
+        FORM_FIELDS = ['game', 'category', 'code', 'author', 'ease', 'thorough', 'description', 'date'];
+        categories = ['Cheat Code', 'Secret', 'Glitch'],
+        CheatCode = function() {};
 
 
     // Title Case a string of words.
@@ -34,8 +34,9 @@
         return words.join(' ');
     };
 
+
     // Set event bindings for various elements.
-    var _setupEvents = function() {
+    var setupEvents = function() {
         $('ease').addEventListener('change', function(evt) {
             $('ease-display').innerHTML = evt.target.value;
         });
@@ -48,13 +49,13 @@
             }
         });
 
-        $('clear-storage').addEventListener('mouseup', function(evt) {
+        $('clear-storage').addEventListener('click', function(evt) {
             evt.preventDefault();
             localStorage.removeItem(STORAGE_KEY);
             location.reload();
         });
 
-        $('clear-display').addEventListener('mouseup', function(evt) {
+        $('clear-display').addEventListener('click', function(evt) {
             evt.preventDefault();
             $('display').innerHTML = '';
             return false;
@@ -63,7 +64,7 @@
 
 
     // Retrieve JSON array string of the selected gaming systems
-    var _getSelectedSystems = function() {
+    var getSelectedSystems = function() {
         var el = $('systems');
 
         if (el === null) {
@@ -102,8 +103,9 @@
             obj[FORM_FIELDS[i]] = value;
         }
 
-        // Add systems separately:
-        obj.systems = _getSelectedSystems();
+        // Add systems separately since it is a
+        // multi-select box.
+        obj.systems = getSelectedSystems();
 
         codeObjects = localStorage.getItem(STORAGE_KEY) || '';
         if (codeObjects.length === 0) {
@@ -200,7 +202,8 @@
 
 
     // Begin execution:
-    _setupEvents();
+    setupEvents();
+    // Set default value of our ease-display SPAN:
     $('ease-display').innerHTML = $('ease').value;
     populateCategory();
     displayStoredCheats();
