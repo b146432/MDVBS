@@ -142,8 +142,8 @@
             arr = [];
 
         for (; i < j; i++) {
-            idx = localStorage.key(i);
-            item = JSON.parse(localStorage.getItem(idx));
+            var idx = localStorage.key(i);
+            var item = JSON.parse(localStorage.getItem(idx));
             arr.push(item);
         }
 
