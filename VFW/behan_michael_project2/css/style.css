@@ -162,24 +162,29 @@ button {
 /**
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Styles specific to display-cheats screen
  */
-#display {
-    padding-left: 0.5em;
-}
 
 #display article {
+    width: 100%;
     display: table;
     border-bottom: 1px solid rgb(80, 80, 80);
     padding: 1em 0 1em 0;
+    background-color: rgb(200, 200, 220);
+}
+
+#display article:nth-child(even) {
+    background-color: rgb(200, 200, 240);
 }
 
 #display dl {
     width: 100%;
     display: table-row;
+
 }
 
 #display dt {
     display: table-cell;
     width: 7em;
+    padding: 0 0.5em 0 0.5em;
 }
 
 #display dd {

@@ -43,10 +43,13 @@
         $('save').addEventListener('click', function(evt) {
             var result = storeCheat();
 
+            evt.preventDefault();
+
             if (result) {
                 location.reload();
             } else {
                 alert('Please fill in all required fields!');
+                return false;
             }
         });
 
