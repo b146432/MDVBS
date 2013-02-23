@@ -11,8 +11,11 @@
         CATEGORY_ID = 'category',
         // These are the form fields we will loop through.
         // The systems field is not included because it is a special case (multi-select)
-        FORM_FIELDS = [
+        FORM_FIELDS = {
             'game': {
+                pattern: /\w+/
+            },
+            'systems': {
                 pattern: /\w+/
             },
             'code': {
@@ -22,7 +25,7 @@
                 pattern: /\w+/
             },
             'thorough': {
-                pattern: /.+/
+                pattern: /^on$/
             },
             'description': {
                 pattern: /\w+/
@@ -30,8 +33,8 @@
             'date': {
                 pattern: /^\d{4}-\d{2}-\d{2}$/
             }
-        ],
-        categories = ['Cheat Code', 'Secret', 'Glitch'],
+        },
+        CATEGORIES = ['Cheat Code', 'Secret', 'Glitch'],
         CheatCode = function() {};
 
 
@@ -55,19 +58,34 @@
 
     // Set event bindings for various elements.
     var setupEvents = function() {
+        // Add validate hooks to form fields:
+        for (var o in FORM_FIELDS) {
+            if (FORM_FIELDS.hasOwnProperty(o)) {
+                $(o).addEventListener('blur', function(evt) {
+                   validate(evt.target);
+                });
+            }
+        }
+
         $('ease').addEventListener('change', function(evt) {
             $('ease-display').innerHTML = evt.target.value;
         });
 
         $('save').addEventListener('click', function(evt) {
-            var result = storeCheat();
+            var result = storeCheat(),
+                errorDiv = $('error');
 
             evt.preventDefault();
 
             if (result) {
+                alert('Saved!')
                 location.reload();
+                // Scroll to top
+                window.scrollTo(0,0);
             } else {
-                alert('Please fill in all required fields!');
+                // Scroll to top
+                window.scrollTo(0,0);
+                errorDiv.style.display = 'block';
                 return false;
             }
         });
@@ -75,6 +93,7 @@
         $('clear-storage').addEventListener('click', function(evt) {
             evt.preventDefault();
             localStorage.clear();
+            alert('All cheat codes have been deleted.')
             location.reload();
         });
 
@@ -126,34 +145,63 @@
     };
 
 
+    // Determine whether or not a form field is valid
+    // @return boolean
+    // @throw exception if element is not found.
+    var isValid = function(domId) {
+        if (domId) {
+            return FORM_FIELDS[domId].pattern.test($(domId).value);
+        }
+
+        throw 'isValid() failed for id ' + id + ': element not found';
+    };
+
+    // Validate a form field
+    var validate = function(el) {
+        if (!isValid(el.getAttribute('id'))) {
+            el.className = 'error';
+            return false;
+        } else {
+            el.className = '';
+            return true;
+        }
+    };
+
+
     // Store data from the form and add/append it
     // to the session storage as a JSON string.
     var storeCheat = function() {
         var obj = new CheatCode(),
-            i   = 0,
-            len = FORM_FIELDS.length,
             key = Math.ceil(Math.random()*1000000).toString(),
-            errors = $('errors'),
+            errors = $('error-messages'),
             hasErrors = false;
+
+        errors.innerHTML = '';
+        obj.key = key;
 
         // Loop through form fields and store them
         // into our object.
-        for (; i < len; i++) {
-            var value = $(FORM_FIELDS[i]).value;
+        for (var o in FORM_FIELDS) {
+            if (FORM_FIELDS.hasOwnProperty(o)) {
+                var field = $(o);
 
-            if (!value) {
-                errors.innerHTML += '<li>' + FORM_FIELDS[i] + ' is required.</li>';
-                hasErrors = true;
+                if (!validate(field)) {
+                    errors.innerHTML += '<li>' + field.getAttribute('title') + ' is required.</li>';
+                    hasErrors = true;
+                } else {
+                    obj[field.getAttribute('id')] = field.value;
+                }
             }
-
-            obj[FORM_FIELDS[i]] = value;
         }
 
-        // Add systems separately since it is a
-        // multi-select box.
-        obj.systems = getSelectedSystems();
+        if (!hasErrors) {
+            // Add systems separately since it is a
+            // multi-select box.
+            obj.systems = getSelectedSystems();
 
-        localStorage.setItem(key, JSON.stringify(obj));
+            // Save to local storage
+            localStorage.setItem(key, JSON.stringify(obj));
+        }
 
         return (false === hasErrors);
     };
@@ -182,7 +230,7 @@
         var data = getStoredCheats(),
             display = $('display');
 
-        if (!data) {
+        if (data.length === 0) {
             display.innerHTML = 'No codes stored';
             return false;
         }
@@ -199,7 +247,11 @@
             for (var o in data[i]) {
                 dl = document.createElement('dl');
 
-                if (data[i].hasOwnProperty(o)) {
+                if (o === 'key') {
+                    article.id = 'entry-' + data[i][o];
+                }
+
+                if (o !== 'key' && data[i].hasOwnProperty(o)) {
                     var dt = document.createElement('dt'),
                         dd = document.createElement('dd');
 
@@ -216,10 +268,110 @@
                     dl.appendChild(dt);
                     dl.appendChild(dd);
                     article.appendChild(dl);
-                    display.appendChild(article);
+
                 }
             } // end property loop
+
+            // Add edit/delete buttons to entry:
+            var editButton = undefined;
+                editButton = document.createElement('a');
+                editButton.innerHTML = 'Edit';
+                editButton.href = '#';
+                // This format is required due to variable hoisting of article
+                editButton.addEventListener('click', (function (article) {
+                    return function(evt) {
+                        evt.preventDefault();
+                        editCode(article.id);
+                        return false;
+                    };
+                })(article));
+
+            article.appendChild(editButton);
+
+            var deleteButton = undefined;
+                deleteButton = document.createElement('a');
+                deleteButton.innerHTML = 'Delete';
+                deleteButton.href = '#';
+                // This format is required due to variable hoisting of article
+                deleteButton.addEventListener('click', (function (article) {
+                    return function(evt) {
+                        evt.preventDefault();
+                        deleteCode(article.id);
+                        return false;
+                    };
+                })(article));
+
+            article.appendChild(deleteButton);
+
+            display.appendChild(article);
+
         } // end object loop
+    };
+
+    // Loads the form for editing of an existing cheat code
+    var editCode =function(id) {
+        var key  = id.split('-')[1],
+            data = JSON.parse(localStorage.getItem(key));
+
+        // Loop through owned properties and pre-fill the
+        // form fields for editing.
+        for (var o in data) {
+            if (data.hasOwnProperty(o)) {
+                var el = $(o);
+
+                // Handle special case for Affected Systems
+                // multi-select.
+                if (o === 'systems') {
+                    var affectedSystems = data[o].split(',');
+
+                    console.log(affectedSystems);
+
+                    for (var i = 0, len = el.options.length; i < len; i++) {
+                        var option = el.options[i];
+
+                        if (affectedSystems.indexOf(option.value) !== -1) {
+                            console.log('This is reached', option);
+                            option.selected = true;
+                        }
+                    }
+                }
+
+                // Non multi-select:
+                el.value = data[o];
+            }
+        }
+
+        $('display-cheats').click();
+    };
+
+    // Deletes entry from local storage and fades out DOM element.
+    // @param id - Local storage key to remove
+    var deleteCode = function(id) {
+        if (!window.confirm('Delete this entry?')) {
+            return false;
+        }
+
+        var el = $(id);
+            el.style.backgroundColor = 'rgb(200, 100, 100)';
+
+        var opacity = 1.0,
+            intervalId = 0;
+
+        var fadeItem = function() {
+            el.style.opacity = opacity;
+            opacity -= 0.01;
+
+            if (opacity < 0.0) {
+                el.style.display = 'none';
+                localStorage.removeItem(id.split('-')[1]);
+                clearTimeout(intervalId);
+                return;
+            }
+
+            intervalId = setTimeout(fadeItem, 5);
+        };
+
+        intervalId = setTimeout(fadeItem, 5);
     };
 
 
@@ -232,14 +384,14 @@
         }
 
         var i = 0,
-            len = categories.length;
+            len = CATEGORIES.length;
 
         for (; i < len; i++) {
             var node = document.createElement('option');
             // Truncate spaces and lower case string to obtain value
             // of the option element we're adding to the category dropdown.
-            node.value = categories[i].replace(' ', '').toLowerCase();
-            node.innerHTML = categories[i];
+            node.value = CATEGORIES[i].replace(' ', '').toLowerCase();
+            node.innerHTML = CATEGORIES[i];
             el.appendChild(node);
         }
 

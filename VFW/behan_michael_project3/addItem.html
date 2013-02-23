@@ -39,10 +39,11 @@
 
 
     <form id="cheat-form" action="#" novalidate><!-- disable html5 validation for now -->
+        <input type="hidden" id="key" name="key" value="" /><!-- for editing existing entries -->
         <fieldset>
             <legend>All fields are required.</legend>
 
-            <section id="errors"><ul></ul><!-- dynamic --></section>
+            <section id="error"><ul id="error-messages"></ul><!-- dynamic --></section>
 
             <!-- begin form elements -->
             <dl>
@@ -88,7 +89,7 @@
 
                 <!-- Checked Thoroughly? -->
                 <dt><label for="thorough">Tested thoroughly?</label></dt>
-                <dd><input title="Tested Thoroughly?" type="checkbox" id="thorough" name="thorough" required /></dd>
+                <dd><input title="Tested Thoroughly?" type="checkbox" checked id="thorough" name="thorough" required /></dd>
 
                 <!-- Full Description -->
                 <dt><label for="description">Description:</label></dt>

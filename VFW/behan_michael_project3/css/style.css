@@ -104,9 +104,24 @@ fieldset legend {
     font-size: 0.7em;
 }
 
-section#errors {
+section#error {
+    display: none;
     color: rgb(200, 100, 100);
+    padding: 1em;
+    border: 1px solid rgb(200, 100, 100);
+    margin-bottom: 1em;
 }
+
+section#error ul {
+    padding-left: 0.5em;
+}
+
+input.error,
+select.error,
+textarea.error {
+    border: 1px solid rgb(200, 100, 100);
+}
+
 
 label {
     display: block;
@@ -194,6 +209,11 @@ button {
 #display dd {
     display: table-cell;
     width: 10em;
+}
+
+#display article a {
+    padding: 0 0.5em 0 0.5em;
+    line-height: 3em;
 }
 
 
