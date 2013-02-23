@@ -169,7 +169,6 @@
         }
     };
 
-
     // Store data from the form and add/append it
     // to the session storage as a JSON string.
     var storeCheat = function() {
@@ -216,7 +215,6 @@
         return (false === hasErrors);
     };
 
-
     // Get data from loal storage
     // @return Array of CheatCode objects
     var getStoredCheats = function() {
@@ -232,7 +230,6 @@
 
         return arr;
     };
-
 
     // Cycle through cheat codes from localStorage
     // and display them.
@@ -381,7 +378,6 @@
 
         intervalId = setTimeout(fadeItem, 5);
     };
-
 
     // Populate the category dropdown
     var populateCategory = function() {
