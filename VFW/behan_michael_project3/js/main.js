@@ -99,6 +99,7 @@
 
         $('display-cheats').addEventListener('click', function(evt) {
             evt.preventDefault();
+            displayStoredCheats();
             toggleDisplay(evt);
             return false;
         });
@@ -199,8 +200,16 @@
             // multi-select box.
             obj.systems = getSelectedSystems();
 
-            // Save to local storage
-            localStorage.setItem(key, JSON.stringify(obj));
+            // Was a key supplied? If so we're in edit mode
+            // and will simply overwrite the existing content
+            // in local storage.
+            var keyInput = $('key');
+            if (keyInput.value !== '') {
+                obj.key = keyInput.value;
+                localStorage.setItem(keyInput.value, JSON.stringify(obj));
+            } else {
+                localStorage.setItem(key, JSON.stringify(obj));
+            }
         }
 
         return (false === hasErrors);
@@ -226,7 +235,7 @@
 
     // Cycle through cheat codes from localStorage
     // and display them.
-    var displayStoredCheats= function() {
+    var displayStoredCheats = function() {
         var data = getStoredCheats(),
             display = $('display');
 
@@ -277,10 +286,12 @@
                 editButton = document.createElement('a');
                 editButton.innerHTML = 'Edit';
                 editButton.href = '#';
+                editButton.className = 'edit';
                 // This format is required due to variable hoisting of article
                 editButton.addEventListener('click', (function (article) {
                     return function(evt) {
                         evt.preventDefault();
+                        $('save').innerHTML = 'Update Cheat';
                         editCode(article.id);
                         return false;
                     };
@@ -317,27 +328,22 @@
         // form fields for editing.
         for (var o in data) {
             if (data.hasOwnProperty(o)) {
-                var el = $(o);
-
-                // Handle special case for Affected Systems
-                // multi-select.
-                if (o === 'systems') {
-                    var affectedSystems = data[o].split(',');
-
-                    console.log(affectedSystems);
-
-                    for (var i = 0, len = el.options.length; i < len; i++) {
-                        var option = el.options[i];
-
-                        if (affectedSystems.indexOf(option.value) !== -1) {
-                            console.log('This is reached', option);
-                            option.selected = true;
-                        }
-                    }
-                }
-
                 // Non multi-select:
-                el.value = data[o];
+                $(o).value = data[o];
+            }
+        }
+
+        // Handle 'Affected Systems' multi-select:
+        if (data['systems']) {
+            var affectedSystems = data['systems'].split(','),
+                el = $('systems');
+
+            for (var i = 0, len = el.options.length; i < len; i++) {
+                var option = el.options[i];
+
+                if (affectedSystems.indexOf(option.value) !== -1) {
+                    option.selected = true;
+                }
             }
         }
 
@@ -404,6 +410,5 @@
     // Set default value of our ease-display SPAN:
     $('ease-display').innerHTML = $('ease').value;
     populateCategory();
-    displayStoredCheats();
 
 })();
