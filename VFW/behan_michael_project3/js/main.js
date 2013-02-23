@@ -5,7 +5,7 @@
 (function() {
 
     // Define variables
-    var $ = function(id) {
+    var $ = function (id) {
             return document.getElementById(id);
         },
         CATEGORY_ID = 'category',
@@ -35,7 +35,7 @@
             }
         },
         CATEGORIES = ['Cheat Code', 'Secret', 'Glitch'],
-        CheatCode = function() {};
+        CheatCode = function () {};
 
 
     // Title Case a string of words.
@@ -45,9 +45,10 @@
     var titleCase = function(str) {
         var words           = str.split(' '),
             titleCasedWords = [],
-            len             = words.length;
+            len             = words.length,
+            i               = 0;
 
-        for (var i = 0; i < len; i++) {
+        for (; i < len; i++) {
             words[i] = words[i].substr(0, 1).toUpperCase()
                      + words[i].substr(1, words[i].length).toLowerCase();
         }
@@ -371,6 +372,7 @@
                 el.style.display = 'none';
                 localStorage.removeItem(id.split('-')[1]);
                 clearTimeout(intervalId);
+                displayStoredCheats();
                 return;
             }
 
