@@ -1,5 +1,5 @@
 // VFW 1302
-// Project 2
+// Project 3
 // Michael Behan
 
 (function() {
