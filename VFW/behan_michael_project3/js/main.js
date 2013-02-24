@@ -318,7 +318,7 @@
     };
 
     // Loads the form for editing of an existing cheat code
-    var editCode =function(id) {
+    var editCode = function(id) {
         var key  = id.split('-')[1],
             data = JSON.parse(localStorage.getItem(key));
 
