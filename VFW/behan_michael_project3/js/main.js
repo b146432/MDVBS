@@ -285,6 +285,16 @@
                 editButton.innerHTML = 'Edit';
                 editButton.href = '#';
                 editButton.className = 'edit';
+
+                // BAD
+                editButton.addEventListener('click', function(evt) {
+                    evt.preventDefault();
+                    $('save').innerHTML = 'Update Cheat';
+                    editCode(article);
+                    return false;
+                });
+
+                // GOOD
                 // This format is required due to variable hoisting of article
                 editButton.addEventListener('click', (function (article) {
                     return function(evt) {
