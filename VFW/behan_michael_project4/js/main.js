@@ -2,7 +2,57 @@
 // Project 4
 // Michael Behan
 
+// Auto-executing closure
 (function() {
+
+    // JSON Stubs for pre-loading.
+    // @TODO: Remove before this goes live!
+    var stubs = [
+        {
+            "game": "Skyrim",
+            "category": "glitch",
+            "systems": "ps3,xbox,pc",
+            "code": "N/A",
+            "author": "The Bobs",
+            "ease": 20,
+            "thorough": "on",
+            "description": "Skyrim - Dragonborn DLC. This is pretty awesome. Just walk through the left wall in Windhelm.",
+            "date": "2013-02-28"
+        },
+        {
+            "game": "Red Dead Redemptiomn",
+            "category": "cheat",
+            "systems": "ps3,xbox",
+            "code": "N/A",
+            "author": "Michael Berhan",
+            "ease": 50,
+            "thorough": "on",
+            "description": "Get all the outfits and you will get a better one to boot.",
+            "date": "2013-02-28"
+        },
+        {
+            "game": "Dragon Age",
+            "category": "glitch",
+            "systems": "ps3",
+            "code": "N/A",
+            "author": "Jenny",
+            "ease": 75,
+            "thorough": "on",
+            "description": "Talk to Duncan 5 times then attack him.",
+            "date": "2013-02-28"
+        },
+        {
+            "game": "Crash Bandicoot",
+            "category": "secret",
+            "systems": "ps3",
+            "code": "N/A",
+            "author": "The Bobs",
+            "ease": 1,
+            "thorough": "on",
+            "description": "Find all gems in every stage.",
+            "date": "2013-02-28"
+        }
+    ];
 
     // Define variables
     var $ = function (id) {
@@ -37,6 +87,24 @@
         CATEGORIES = ['Cheat Code', 'Secret', 'Glitch'],
         CheatCode = function () {};
 
+
+    // Generate random key for localStorage.
+    // @return string
+    var getRandomKey = function() {
+        return Math.ceil(Math.random()*1000000).toString();
+    }
+
+    // Load stubbed JSON into localStorage
+    var loadStubs = function() {
+        var key = null,
+            o   = null;
+
+        for (var o in stubs) {
+            key = getRandomKey();
+            stubs[o].key = key;
+            localStorage.setItem(key, JSON.stringify(stubs[o]));
+        }
+    };
 
     // Title Case a string of words.
     // @param: str - String of words separated by spaces
@@ -106,6 +174,12 @@
         });
     };
 
+    // Update the value of the ease span based
+    // on its associated input[type=range]
+    var updateEaseDisplay = function() {
+        $('ease-display').innerHTML = $('ease').value;
+    };
+
 
     // Toggle between form display and stored
     // cheat code display.
@@ -173,7 +247,7 @@
     // to the session storage as a JSON string.
     var storeCheat = function() {
         var obj = new CheatCode(),
-            key = Math.ceil(Math.random()*1000000).toString(),
+            key = getRandomKey(),
             errors = $('error-messages'),
             hasErrors = false;
 
@@ -327,6 +401,7 @@
         for (var o in data) {
             if (data.hasOwnProperty(o)) {
                 // Non multi-select:
+                console.log(o);
                 $(o).value = data[o];
             }
         }
@@ -345,6 +420,7 @@
             }
         }
 
+        updateEaseDisplay();
         $('display-cheats').click();
     };
 
@@ -402,11 +478,10 @@
         return true;
     };
 
-
-    // Begin execution:
+    // Begin execution
+    loadStubs(); // @TODO: Remove before this goes live!
     setupEvents();
-    // Set default value of our ease-display SPAN:
-    $('ease-display').innerHTML = $('ease').value;
+    updateEaseDisplay();
     populateCategory();
 
 })();
