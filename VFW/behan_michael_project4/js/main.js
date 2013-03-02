@@ -332,7 +332,7 @@
                     article.id = 'entry-' + data[i][o];
                 }
 
-                if (o !== 'key' && data[i].hasOwnProperty(o)) {
+                if (o !== 'key') {
                     var dt = document.createElement('dt'),
                         dd = document.createElement('dd');
 
@@ -399,11 +399,7 @@
         // Loop through owned properties and pre-fill the
         // form fields for editing.
         for (var o in data) {
-            if (data.hasOwnProperty(o)) {
-                // Non multi-select:
-                console.log(o);
-                $(o).value = data[o];
-            }
+            $(o).value = data[o];
         }
 
         // Handle 'Affected Systems' multi-select:
