@@ -186,8 +186,31 @@ button {
     width: 100%;
     display: table;
     border-bottom: 1px solid rgb(80, 80, 80);
-    padding: 1em 0 1em 0;
+    padding: 3.3em 0 1em 0;
     background-color: rgb(200, 200, 220);
+    position: relative;
+}
+
+#display article aside {
+    display: inline-block;
+    position: absolute;
+    top: 0.5em;
+    left: 0.5em;
+    width: 50px;
+    height: 50px;
+    background: transparent url(../img/sprite-icon.png) no-repeat;
+}
+
+#display article aside.cheat {
+    background-position: 0 0;
+}
+
+#display article aside.glitch {
+    background-position: -50px 0;
+}
+
+#display article aside.secret {
+    background-position: -100px 0;
 }
 
 #display article:nth-child(even) {

@@ -330,6 +330,11 @@
 
                 if (o === 'key') {
                     article.id = 'entry-' + data[i][o];
+                } else if (o === 'category') {
+                    // Create element that will store icon:
+                    var aside = document.createElement('aside');
+                        aside.className = 'icon ' + data[i][o];
+                    article.appendChild(aside);
                 }
 
                 if (o !== 'key') {
@@ -368,7 +373,6 @@
                         return false;
                     };
                 })(article));
-
             article.appendChild(editButton);
 
             var deleteButton = undefined;
@@ -383,7 +387,6 @@
                         return false;
                     };
                 })(article));
-
             article.appendChild(deleteButton);
 
             display.appendChild(article);
