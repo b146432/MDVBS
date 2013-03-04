@@ -346,7 +346,6 @@
             // Loop through each owned property in object,
             // creating markup and appending it to our display element.
             for (var o in data[i]) {
-                console.log(data[i]);
                 dl = document.createElement('dl');
 
                 if (o === 'key') {
