@@ -21,7 +21,7 @@
         },
         {
             "game": "Red Dead Redemptiomn",
-            "category": "cheat",
+            "category": "cheatcode",
             "systems": "ps3,xbox",
             "code": "N/A",
             "author": "Michael Berhan",
@@ -54,6 +54,7 @@
         }
     ];
 
+
     // Define variables
     var $ = function (id) {
             return document.getElementById(id);
@@ -77,6 +78,9 @@
             'thorough': {
                 pattern: /^on$/
             },
+            'ease': {
+                pattern: /\d+/,
+            },
             'description': {
                 pattern: /\w+/
             },
@@ -85,26 +89,38 @@
             }
         },
         CATEGORIES = ['Cheat Code', 'Secret', 'Glitch'],
-        CheatCode = function () {};
+        CheatCode = function () {},
+        STUBS_LOADED_KEY = 'cheat-codes-stubs-loaded'; // @TODO Remove before go-live!
 
 
     // Generate random key for localStorage.
     // @return string
     var getRandomKey = function() {
         return Math.ceil(Math.random()*1000000).toString();
-    }
+    };
+
 
     // Load stubbed JSON into localStorage
     var loadStubs = function() {
+        if (localStorage.getItem(STUBS_LOADED_KEY)) {
+            return;
+        }
+
         var key = null,
             o   = null;
 
-        for (var o in stubs) {
+        for (o in stubs) {
             key = getRandomKey();
             stubs[o].key = key;
             localStorage.setItem(key, JSON.stringify(stubs[o]));
         }
+
+        // Set a flag in local storage that says stubs have
+        // been loaded. This is checked above so that stubs
+        // are not reloaded every time the page reloads.
+        localStorage.setItem(STUBS_LOADED_KEY, 'true');
     };
+
 
     // Title Case a string of words.
     // @param: str - String of words separated by spaces
@@ -174,6 +190,7 @@
         });
     };
 
+
     // Update the value of the ease span based
     // on its associated input[type=range]
     var updateEaseDisplay = function() {
@@ -232,6 +249,7 @@
         throw 'isValid() failed for id ' + id + ': element not found';
     };
 
+
     // Validate a form field
     var validate = function(el) {
         if (!isValid(el.getAttribute('id'))) {
@@ -242,6 +260,7 @@
             return true;
         }
     };
+
 
     // Store data from the form and add/append it
     // to the session storage as a JSON string.
@@ -289,6 +308,7 @@
         return (false === hasErrors);
     };
 
+
     // Get data from loal storage
     // @return Array of CheatCode objects
     var getStoredCheats = function() {
@@ -305,18 +325,18 @@
         return arr;
     };
 
+
     // Cycle through cheat codes from localStorage
     // and display them.
-    var displayStoredCheats = function() {
-        var data = getStoredCheats(),
-            display = $('display');
+    var displayStoredCheats = function(category, search) {
+        var data            = getStoredCheats(),
+            display         = $('display'),
+            len             = data.length;
 
-        if (data.length === 0) {
+        if (len === 0) {
             display.innerHTML = 'No codes stored';
             return false;
         }
-
-        var len = data.length;
 
         // Loop through each object in data
         for (var i = 0; i < len; i++) {
@@ -326,18 +346,21 @@
             // Loop through each owned property in object,
             // creating markup and appending it to our display element.
             for (var o in data[i]) {
+                console.log(data[i]);
                 dl = document.createElement('dl');
 
                 if (o === 'key') {
+                    // Handle 'key'
                     article.id = 'entry-' + data[i][o];
                 } else if (o === 'category') {
+                    // Handle category
+
                     // Create element that will store icon:
                     var aside = document.createElement('aside');
                         aside.className = 'icon ' + data[i][o];
                     article.appendChild(aside);
-                }
-
-                if (o !== 'key') {
+                } else {
+                    // Handle all other types
                     var dt = document.createElement('dt'),
                         dd = document.createElement('dd');
 
@@ -394,6 +417,7 @@
         } // end object loop
     };
 
+
     // Loads the form for editing of an existing cheat code
     var editCode = function(id) {
         var key  = id.split('-')[1],
@@ -422,6 +446,7 @@
         updateEaseDisplay();
         $('display-cheats').click();
     };
+
 
     // Deletes entry from local storage and fades out DOM element.
     // @param id - Local storage key to remove
@@ -454,6 +479,7 @@
         intervalId = setTimeout(fadeItem, 5);
     };
 
+
     // Populate the category dropdown
     var populateCategory = function() {
         var el = $(CATEGORY_ID);
@@ -476,6 +502,7 @@
 
         return true;
     };
+
 
     // Begin execution
     loadStubs(); // @TODO: Remove before this goes live!
