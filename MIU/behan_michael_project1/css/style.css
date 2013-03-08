@@ -21,6 +21,11 @@ body.index {
     background-color: rgb(230, 230, 230);
 }
 
+body.index #feature h1 {
+    position: absolute;
+    left: -1000px;
+}
+
 body.index #feature img {
     display: block;
     width: 315px;
