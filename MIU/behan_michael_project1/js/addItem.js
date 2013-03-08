@@ -29,7 +29,7 @@
                 pattern: /^on$/
             },
             'ease': {
-                pattern: /\d+/,
+                pattern: /\d+/
             },
             'description': {
                 pattern: /\w+/
