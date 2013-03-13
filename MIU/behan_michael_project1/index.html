@@ -16,33 +16,137 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="MobileOptimized" content="320" />
     <title>Cheat Codes</title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" />
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body class="index">
-    <section id="feature">
-        <a href="addItem.html"><img src="img/index-cta.png" alt="Cheats, Secrets, Glitches - Add yours!"></a>
-    </section>
+    <div data-role="page" data-theme="b" id="home">
+        <section id="feature">
+            <header>
+                <h1>Cheats, Serets, Glitches</h1>
+            </header>
+            <a href="#add"><img src="img/index-cta.png" alt="Cheats, Secrets, Glitches - Add yours!" /></a>
+        </section>
 
-    <section id="search">
-        <header>
-            <h2>Search</h2>
+        <div data-role="content">
+            <section id="search">
+                <header data-role="header">
+                    <h2>Search</h2>
+                </header>
+                <input type="text" placeholder="Search&hellip;" id="search-box">
+            </section>
+
+            <section id="browse">
+                <header data-role="header">
+                    <h2>Browse by System</h2>
+                </header>
+
+                <ul id="systems" data-role="controlgroup">
+                    <li><a href="404.html" data-role="button" data-icon="arrow-r" data-iconpos="right">PS3</a></li>
+                    <li><a href="404.html" data-role="button" data-icon="arrow-r" data-iconpos="right">XBox</a></li>
+                    <li><a href="404.html" data-role="button" data-icon="arrow-r" data-iconpos="right">PC</a></li>
+                    <li><a href="404.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Wii-U</a></li>
+                    <li><a href="404.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Wii</a></li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <!-- Add Item Page -->
+    <div id="add" data-role="page" data-add-back-btn="true" data-theme="b">
+        <header data-role="header">
+            <h1>Add Cheat Code</h1>
         </header>
-        <input type="text" placeholder="Search&hellip;" id="search-box">
-    </section>
 
-    <section id="browse">
-        <header>
-            <h2>Browse by System</h2>
-        </header>
+        <nav>
+            <ul>
+                <li><a id="clear-storage" href="#" data-role="button" data-inline="true" title="Delete All Stored Cheats">Clear Stored Cheats</a></li>
+                <li><a id="display-cheats" href="#" data-role="button" data-inline="true" title="Display Stored Cheats">Display Cheats</a></li>
+            </ul>
+        </nav>
 
-        <ul id="systems">
-            <li><a href="404.html">PS3</a></li>
-            <li><a href="404.html">XBox</a></li>
-            <li><a href="404.html">PC</a></li>
-            <li><a href="404.html">Wii-U</a></li>
-            <li><a href="404.html">Wii</a></li>
-        </ul>
-    </section>
+        <!-- Display Section -->
+        <section id="display">
+            <header>
+                <h3>Stored Cheats:</h3>
+            </header>
+            <!-- dynamically populated -->
+        </section>
+
+        <form id="cheat-form" action="#"><!-- disable html5 validation for now -->
+            <input type="hidden" id="key" name="key" value="" /><!-- for editing existing entries -->
+            <fieldset>
+                <legend>All fields are required.</legend>
+
+                <section id="error"><ul id="error-messages"></ul><!-- dynamic --></section>
+
+                <!-- begin form elements -->
+                <dl>
+                    <!-- Game Title -->
+                    <dt><label for="game">Game Title:</label></dt>
+                    <dd><input title="Game Title" type="text" id="game" name="game" required /></dd>
+
+                    <!-- Category -->
+                    <dt><label for="category">Category:</label></dt>
+                    <dd>
+                        <select title="Category" id="category" name="category">
+                            <!-- dynamically populated -->
+                        </select>
+                    </dd>
+
+                    <!-- Affected game systems -->
+                    <dt><label for="systems">Affected Game System(s):</label></dt>
+                    <dd>
+                        <select title="Affected Game Systems" multiple id="systems" name="systems" required>
+                            <option value="xbox">XBox</option>
+                            <option value="ps3">PS3</option>
+                            <option value="pc">PC</option>
+                            <option value="wii">Wii</option>
+                            <option value="wiiu">Wii U</option>
+                        </select>
+                    </dd>
+
+                    <!-- Cheat Code -->
+                    <dt><label for="code">Code:</label></dt>
+                    <dd><input title="Code" type="text" id="code" name="code" required /></dd>
+
+                    <!-- Author -->
+                    <dt><label for="author">Author Name:</label></dt>
+                    <dd><input title="Author Name" type="text" id="author" name="author" pattern="[a-zA-Z ]" required /></dd>
+
+                    <!-- Ease of Reproduction -->
+                    <dt><label for="ease">Ease of reproduction:</label></dt>
+                    <dd>
+                        <input type="range" name="range" id="ease" min="1" max="100" value="50" />
+                        &nbsp;
+                        <span id="ease-display"></span>
+                    </dd>
+
+                    <!-- Checked Thoroughly? -->
+                    <dt><label for="thorough">Tested thoroughly?</label></dt>
+                    <dd><input title="Tested Thoroughly?" type="checkbox" checked id="thorough" name="thorough" required /></dd>
+
+                    <!-- Full Description -->
+                    <dt><label for="description">Description:</label></dt>
+                    <dd><textarea title="Description" id="description" name="description" required></textarea></dd>
+
+                    <!-- Date Found -->
+                    <dt><label for="date">Date Found:</label></dt>
+                    <dd><input title="Date Found" id="date" type="date" name="date" required /></dd>
+
+                </dl>
+
+                    <input type="submit" value="Submit" />
+                
+            </fieldset>
+        </form>
+    </div>
+
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="js/JSON.js"></script>
+    <script type="text/javascript" src="js/addItem.js"></script>
 </body>
 </html>
 

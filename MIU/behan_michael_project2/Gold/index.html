@@ -16,33 +16,51 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="MobileOptimized" content="320" />
     <title>Cheat Codes</title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body class="index">
-    <section id="feature">
-        <a href="addItem.html"><img src="img/index-cta.png" alt="Cheats, Secrets, Glitches - Add yours!"></a>
-    </section>
+    
+    <div id="home" data-role="page" data-theme="b">
+        <section id="feature">
+            <header data-role="header">
+                <h1>Cheats, Secrets, Glitches</h1>
+            </header>
+            <a href="addItem.html"><img src="img/index-cta.png" alt="Cheats, Secrets, Glitches - Add yours!"></a>
+        </section>
 
-    <section id="search">
-        <header>
-            <h2>Search</h2>
-        </header>
-        <input type="text" placeholder="Search&hellip;" id="search-box">
-    </section>
+        <section id="search">
+            <header data-role="header">
+                <h4>Search</h4>
+            </header>
+            <input type="search" data-mini="true" placeholder="Search&hellip;" id="search-box">
+        </section>
 
-    <section id="browse">
-        <header>
-            <h2>Browse by System</h2>
-        </header>
+        <section id="browse">
+            <header data-role="header">
+                <h4>Browse by System</h4>
+            </header>
 
-        <ul id="systems">
-            <li><a href="404.html">PS3</a></li>
-            <li><a href="404.html">XBox</a></li>
-            <li><a href="404.html">PC</a></li>
-            <li><a href="404.html">Wii-U</a></li>
-            <li><a href="404.html">Wii</a></li>
-        </ul>
-    </section>
+            <ul id="systems" data-role="controlgroup">
+                <li><a href="404.html" data-role="button" data-icon="arrow-r" data-iconpos="right">PS3</a></li>
+                <li><a href="404.html" data-role="button" data-icon="arrow-r" data-iconpos="right">XBox</a></li>
+                <li><a href="404.html" data-role="button" data-icon="arrow-r" data-iconpos="right">PC</a></li>
+                <li><a href="404.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Wii-U</a></li>
+                <li><a href="404.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Wii</a></li>
+            </ul>
+        </section>
+    
+        <nav data-role="navbar" data-position="fixed">
+            <ul>
+                <li><a href="#" data-role="button" data-href="home" data-icon="home">Home</a></li>
+                <li><a href="#" data-role="button" data-href="home" data-icon="info">About</a></li>
+                <li><a href="#" data-role="button" data-href="home" data-icon="check">Newsstand</a></li>
+            </ul>
+        </nav>
+    </div><!-- home -->
+    
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 </body>
 </html>
 

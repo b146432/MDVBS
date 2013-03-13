@@ -6,10 +6,7 @@
 (function() {
 
     // Define variables
-    var $ = function (id) {
-            return document.getElementById(id);
-        },
-        CATEGORY_ID = 'category',
+    var CATEGORY_ID = 'category',
         // These are the form fields we will loop through.
         // The systems field is not included because it is a special case (multi-select)
         FORM_FIELDS = {
@@ -96,19 +93,19 @@
         // Add validate hooks to form fields:
         for (var o in FORM_FIELDS) {
             if (FORM_FIELDS.hasOwnProperty(o)) {
-                $(o).addEventListener('blur', function(evt) {
+                $(o).blur(function(evt) {
                    validate(evt.target);
                 });
             }
         }
 
-        $('ease').addEventListener('change', function(evt) {
-            $('ease-display').innerHTML = evt.target.value;
+        $('#ease').change(function(evt) {
+            $('#ease-display').html(evt.target.value);
         });
 
-        $('save').addEventListener('click', function(evt) {
+        $('#save').click(function(evt) {
             var result = storeCheat(),
-                errorDiv = $('error');
+                $errorDiv = $('#error');
 
             evt.preventDefault();
 
@@ -120,19 +117,19 @@
             } else {
                 // Scroll to top
                 window.scrollTo(0,0);
-                errorDiv.style.display = 'block';
+                $errorDiv.hide()
                 return false;
             }
         });
 
-        $('clear-storage').addEventListener('click', function(evt) {
+        $('#clear-storage').click(function(evt) {
             evt.preventDefault();
             localStorage.clear();
             alert('All cheat codes have been deleted.')
             location.reload();
         });
 
-        $('display-cheats').addEventListener('click', function(evt) {
+        $('#display-cheats').click(function(evt) {
             evt.preventDefault();
             displayStoredCheats();
             toggleDisplay(evt);
@@ -144,7 +141,7 @@
     // Update the value of the ease span based
     // on its associated input[type=range]
     var updateEaseDisplay = function() {
-        $('ease-display').innerHTML = $('ease').value;
+        $('#ease-display').html($('ease').value);
     };
 
 
@@ -152,32 +149,32 @@
     // cheat code display.
     // @param evt - Event passed from handler.
     var toggleDisplay = function(evt) {
-        var form = $('cheat-form'),
-            display = $('display');
+        var $form = $('#cheat-form'),
+            $display = $('#display');
 
-        if (form.style.display === 'none') {
-            form.style.display = 'block';
-            display.style.display = 'none';
-            evt.target.innerHTML = 'Display Cheats';
+        if (!$form.is(":visible")) {
+            $form.show();
+            $display.hide();
+            $(evt.target).html('Display Cheats');
         } else {
-            form.style.display = 'none';
-            display.style.display = 'block';
-            evt.target.innerHTML = 'Add Cheat';
+            $form.hide();
+            $display.show();
+            $(evt.target).html('Add Cheat');
         }
     };
 
 
     // Retrieve JSON array string of the selected gaming systems
     var getSelectedSystems = function() {
-        var el = $('systems');
+        var $el = $('#systems');
 
-        if (el === null) {
+        if (!$el) {
             return false;
         }
 
         var systems = [],
             i = 0,
-            selectedSystems = el.selectedOptions,
+            selectedSystems = $el.get(0).selectedOptions,
             len = selectedSystems.length;
 
         for (; i < len; i++) {
@@ -193,20 +190,20 @@
     // @throw exception if element is not found.
     var isValid = function(domId) {
         if (domId) {
-            return FORM_FIELDS[domId].pattern.test($(domId).value);
+            return FORM_FIELDS[domId].pattern.test($('#' + domId).value);
         }
 
-        throw 'isValid() failed for id ' + id + ': element not found';
+        throw 'isValid() failed for id ' + domId + ': element not found';
     };
 
 
     // Validate a form field
-    var validate = function(el) {
+    var validate = function($el) {
         if (!isValid(el.getAttribute('id'))) {
-            el.className = 'error';
+            $el.addClass('error');
             return false;
         } else {
-            el.className = '';
+            $el.removeClass('error');
             return true;
         }
     };
@@ -217,7 +214,7 @@
     var storeCheat = function() {
         var obj = new CheatCode(),
             key = getRandomKey(),
-            errors = $('error-messages'),
+            $errors = $('#error-messages'),
             hasErrors = false;
 
         errors.innerHTML = '';
@@ -227,13 +224,13 @@
         // into our object.
         for (var o in FORM_FIELDS) {
             if (FORM_FIELDS.hasOwnProperty(o)) {
-                var field = $(o);
+                var $field = $('#' + o);
 
-                if (!validate(field)) {
-                    errors.innerHTML += '<li>' + field.getAttribute('title') + ' is required.</li>';
+                if (!validate($field)) {
+                    $errors.html($error.html() + '<li>' + field.getAttribute('title') + ' is required.</li>');
                     hasErrors = true;
                 } else {
-                    obj[field.getAttribute('id')] = field.value;
+                    obj[field.getAttribute('id')] = $field.value;
                 }
             }
         }
@@ -246,10 +243,10 @@
             // Was a key supplied? If so we're in edit mode
             // and will simply overwrite the existing content
             // in local storage.
-            var keyInput = $('key');
-            if (keyInput.value !== '') {
-                obj.key = keyInput.value;
-                localStorage.setItem(keyInput.value, JSON.stringify(obj));
+            var $keyInput = $('#key');
+            if ($keyInput.value !== '') {
+                obj.key = $keyInput.value;
+                localStorage.setItem($keyInput.value, JSON.stringify(obj));
             } else {
                 localStorage.setItem(key, JSON.stringify(obj));
             }
@@ -280,11 +277,11 @@
     // and display them.
     var displayStoredCheats = function(category, search) {
         var data            = getStoredCheats(),
-            display         = $('display'),
+            $display         = $('#display'),
             len             = data.length;
 
         if (len === 0) {
-            display.innerHTML = 'No codes stored';
+            $display.html('No codes stored');
             return false;
         }
 
