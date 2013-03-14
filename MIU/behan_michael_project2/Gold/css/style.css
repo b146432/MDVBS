@@ -4,6 +4,15 @@
     Michael Behan 1303
     MIU Project 1
 */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.ui-header .ui-title {
+    margin-right: 10%;
+    margin-left: 10%;
+}
 
 #feature img {
     display: block;
@@ -14,28 +23,62 @@ section {
     margin-bottom: 1.5em;
 }
 
-a[data-role="button"] {
-    height: 3em;
+#add-or-edit legend {
+    color: rgb(240, 40, 40);
 }
 
-label,
-label[for] {
-    font-weight: 900;
-
-}
-dd {
+#add-or-edit dt, dd {
     display: block;
-    margin-bottom: 3em;
 }
 
-div[class=ui-slider] {
-    padding-bottom: 4em;
-    display: inline-block;
+#add-or-edit dt {
+    margin-top: 2em;
+}
+
+#add-or-edit dd {
+    padding-bottom: 15px;
+    border-bottom: 1px inset rgb(200, 200, 200);
+    width: 100%;
+}
+
+#about p {
+    display: block;
+    padding: 1em;
+}
+
+#news article {
+    display: block;
+    padding: 1em;
+}
+
+#news article aside {
+    font-style: italic;
+    font-size: 11pt;
+}
+
+#display span.match {
+    color: rgb(42, 42, 42);
+    background-color: rgb(236, 228, 97);
+}
+
+#display article.entry {
+    display: table;
+    padding: 1em 0 1em 0;
+    border-bottom: 1px solid rgb(200, 200, 200);
+    width: 100%;
+}
+
+#display dl {
+    display: table-row;
+}
+
+#display dt,
+#display dd {
+    display: table-cell;
+    width: 50%;
 }
 
 label.error {
-    float: none;
-    color: red;
-    padding-left: .5em;
-    vertical-align: top;
+    color: #F00;
+    padding-left: 1em;
 }
