@@ -57,7 +57,7 @@ var json = [
     {
         "game": "Super Mario Bros 3 (Wii Edition)",
         "category": "glitch",
-        "systems": "wii,wiiu",
+        "systems": "wii,wii-u",
         "code": "N/A",
         "author": "Team America",
         "ease": 20,
@@ -167,7 +167,7 @@ var json = [
     {
         "game": "Super Mario Bros 3 (Wii Edition)",
         "category": "glitch",
-        "systems": "wii,wiiu",
+        "systems": "wii,wii-u",
         "code": "N/A",
         "author": "Team America",
         "ease": 20,

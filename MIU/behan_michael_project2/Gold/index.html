@@ -11,22 +11,25 @@
     <meta name="keywords" content="cheat codes,codes,games,video games,find cheat" />
     <meta name="author" content="Michael Behan" />
     <meta name="robots" content="index, follow" />
-    <meta name="viewport" content="user-scalable=no, width=device-width" />
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1" />
     <meta name="viewport" content="target-densitydpi=device-dpi" />
     <meta name="HandheldFriendly" content="True" />
     <meta name="MobileOptimized" content="320" />
     <title>Cheat Codes</title>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <script type="text/javscript" src="js/lib/modernizr-2.6.2.min.js"></script>
 </head>
-<body class="index">
-    
+<body hidden>
+
+    <!-- Home Page -->
     <div id="home" data-role="page" data-theme="b">
         <section id="feature">
             <header data-role="header">
                 <h1>Cheats, Secrets, Glitches</h1>
             </header>
-            <a href="addItem.html"><img src="img/index-cta.png" alt="Cheats, Secrets, Glitches - Add yours!"></a>
+            <a href="#add-or-edit"><img src="img/index-cta.png" alt="Cheats, Secrets, Glitches - Add yours!"></a>
         </section>
 
         <section id="search">
@@ -49,18 +52,101 @@
                 <li><a href="404.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Wii</a></li>
             </ul>
         </section>
-    
-        <nav data-role="navbar" data-position="fixed">
-            <ul>
-                <li><a href="#" data-role="button" data-href="home" data-icon="home">Home</a></li>
-                <li><a href="#" data-role="button" data-href="home" data-icon="info">About</a></li>
-                <li><a href="#" data-role="button" data-href="home" data-icon="check">Newsstand</a></li>
-            </ul>
-        </nav>
-    </div><!-- home -->
-    
-    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+
+    </div><!-- home page -->
+
+    <!-- Add Item Page -->
+    <div id="add-or-edit" data-role="page" data-theme="b">
+        <header data-role="header">
+            <h1>Add Cheat Code</h1>
+        </header>
+
+        <form id="cheat-form" method="posst" action="#">
+            <input type="hidden" id="key" name="key" value="" /><!-- for editing existing entries -->
+            <fieldset>
+                <legend>All fields are required.</legend>
+
+                <!-- begin form elements -->
+                <dl>
+                    <!-- Game Title -->
+                    <dt><label for="game">Game Title:</label></dt>
+                    <dd><input title="Game Title" type="text"  id="game" name="game" /></dd>
+
+                    <!-- Category -->
+                    <dt><label for="category">Category:</label></dt>
+                    <dd>
+                        <select title="Category" id="category" name="category">
+                        </select>
+                    </dd>
+
+                    <!-- Affected game systems -->
+                    <dt><label>Affected Game System(s):</label></dt>
+                    <dd data-role="controlgroup">
+                        <label for="xbox">XBox</label><input type="checkbox" id="xbox" name="systems" value="xbox" />
+                        <label for="ps3">PS3</label><input type="checkbox" id="ps3" name="systems" value="ps3" />
+                        <label for="pc">PC</label><input type="checkbox" id="pc" name="systems" value="pc" />
+                        <label for="wii">Wii</label><input type="checkbox" id="wii" name="systems" value="wii" />
+                        <label for="wii-u">Wii-U</label><input type="checkbox" id="wii-u" name="systems" value="wii-u" />
+                    </dd>
+
+                    <!-- Cheat Code -->
+                    <dt><label for="code">Code:</label></dt>
+                    <dd><input title="Code" type="text" id="code" name="code" required /></dd>
+
+                    <!-- Author -->
+                    <dt><label for="author">Author Name:</label></dt>
+                    <dd><input title="Author Name" type="text" id="author" name="author" required /></dd>
+
+                    <!-- Ease of Reproduction -->
+                    <dt><label for="ease">Ease of reproduction:</label></dt>
+                    <dd>
+                        <input type="range" name="range" id="ease" min="1" max="100" value="50" data-inline="true" />
+                    </dd>
+
+                    <!-- Checked Thoroughly? -->
+                    <dt><label for="thorough">Tested thoroughly?</label></dt>
+                    <dd><input title="Tested Thoroughly?" type="checkbox" checked id="thorough" name="thorough" required /></dd>
+
+                    <!-- Full Description -->
+                    <dt><label for="description">Description:</label></dt>
+                    <dd><textarea title="Description" id="description" name="description" required></textarea></dd>
+
+                    <!-- Date Found -->
+                    <dt><label for="date">Date Found:</label></dt>
+                    <dd><input title="Date Found" id="date" type="date" name="date" required /></dd>
+
+                </dl>
+
+                <input type="submit" data-role="button" value="Add" />
+            </fieldset>
+        </form>
+    </div><!-- add item page -->
+
+    <div data-role="page" id="show" data-theme="b">
+        <!-- Display Section -->
+        <section>
+            <header data-role="header">
+                <h3>Stored Cheats</h3>
+            </header>
+
+            <nav data-role="navbar">
+                <ul>
+                    <li><a id="clear-storage" href="#" title="Delete All Stored Cheats">Clear Stored Cheats</a></li>
+                    <li><a id="display-cheats" href="#show" title="Display Stored Cheats">Display Cheats</a></li>
+                </ul>
+            </nav>
+
+            <section id="display">
+            </section>
+            <!-- dynamically populated -->
+        </section>
+    </div><!-- stored cheats page -->
+
+
+    <script type="text/javascript" src="js/lib/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.mobile-1.3.0.min.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="js/JSON.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
-

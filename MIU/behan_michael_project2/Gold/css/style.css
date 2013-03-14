@@ -4,6 +4,7 @@
     Michael Behan 1303
     MIU Project 1
 */
+
 #feature img {
     display: block;
     margin: 0 auto;
@@ -15,4 +16,26 @@ section {
 
 a[data-role="button"] {
     height: 3em;
+}
+
+label,
+label[for] {
+    font-weight: 900;
+
+}
+dd {
+    display: block;
+    margin-bottom: 3em;
+}
+
+div[class=ui-slider] {
+    padding-bottom: 4em;
+    display: inline-block;
+}
+
+label.error {
+    float: none;
+    color: red;
+    padding-left: .5em;
+    vertical-align: top;
 }
