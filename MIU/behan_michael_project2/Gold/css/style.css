@@ -23,6 +23,24 @@ section {
     margin-bottom: 1.5em;
 }
 
+#systems figure {
+    margin: 20px;
+    width: 44px;
+    height: 44px;
+}
+
+#systems figure figcaption {
+    width: 100%;
+    text-align: center;
+    margin-top: -20px;
+}
+
+#systems figure img  {
+    width: 100%;
+    height: auto;
+    margin: 10px;
+}
+
 #add-or-edit legend {
     color: rgb(240, 40, 40);
 }
