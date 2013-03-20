@@ -12,7 +12,10 @@
     var $validator = $('#cheat-form').validate({
        rules:{
            game:{
-               required: true,
+               required: true
+           },
+           category:{
+               required: true
            },
            systems: {
                required: true
@@ -36,6 +39,9 @@
        messages:{
            game:{
                required: "Please enter a game title."
+           },
+           category:{
+               required: 'Please select a category.'
            },
            systems:{
                required: "Please choose at least 1 system."
@@ -62,7 +68,7 @@
     var CATEGORY_ID = 'category',
         // These are the form fields we will loop through.
         // The systems field is not included because it is a special case (multi-select)
-        FORM_FIELDS      = ['game', 'systems', 'code', 'author', 'thorough', 'description', 'date'],
+        FORM_FIELDS      = ['game', 'systems', 'category', 'code', 'author', 'thorough', 'description', 'date'],
         SYSTEMS          = ['xbox', 'ps3', 'pc', 'wii', 'wii-u', 'ds'],
         CATEGORIES       = ['Cheat Code', 'Secret', 'Glitch'],
         CheatCode        = function () {},
@@ -513,6 +519,8 @@
     loadStubs(); // @TODO: Remove before this goes live!
     setupEvents();
     populateCategory();
+    // Good defaults setup:
+    $('#date').attr('value', moment().format('YYYY-MM-DD'));
 
     // Initalize toolbars on all pages
     $(['#home', '#add-or-edit', '#show', '#about', '#news']).each(function(idx, val) {

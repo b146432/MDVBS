@@ -59,12 +59,11 @@ section {
     width: 100%;
 }
 
-#add-or-edit dd.hint {
+#add-or-edit span.hint {
+    display: block;
     font-size: 0.8em;
     color: rgb(70, 70, 70);
-    position: relative;
-    bottom: 15px;
-    left: 1em;
+    margin-top: 5px;
 }
 
 #about p {
