@@ -59,6 +59,14 @@ section {
     width: 100%;
 }
 
+#add-or-edit dd.hint {
+    font-size: 0.8em;
+    color: rgb(70, 70, 70);
+    position: relative;
+    bottom: 15px;
+    left: 1em;
+}
+
 #about p {
     display: block;
     padding: 1em;

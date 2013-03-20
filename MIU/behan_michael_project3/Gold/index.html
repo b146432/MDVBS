@@ -46,34 +46,15 @@
                 <h4>Browse by System</h4>
             </header>
 
-            <div id="systems" class="ui-grid-b">
-                <figure class="ui-block-a" title="ps3">
-                    <img src="img/ps3.png" alt="ps3" />
-                    <figcaption>PS3</figcaption>
-                </figure>
-                <figure class="ui-block-b" title="xbox">
-                    <img src="img/xbox.png" alt="xbox" />
-                    <figcaption class="imgCaption">Xbox</figcaption>
-                </figure>
-                <figure class="ui-block-c" title="pc">
-                    <img src="img/pc.png" alt="pc" />
-                    <figcaption>PC</figcaption>
-                </figure>
-                <figure class="ui-block-a" title="wii">
-                    <img src="img/wii.png" alt="wii" />
-                    <figcaption class="imgCaption">Wii</figcaption>
-                </figure>
-                <figure class="ui-block-b" title="wii-u">
-                    <img src="img/wii-u.png" alt="wii-u" />
-                    <figcaption>Wii-U</figcaption>
-                </figure>
-                <figure class="ui-block-c" title="ds">
-                    <img src="img/ds.png" alt="ds" />
-                    <figcaption class="imgCaption">DS</figcaption>
-                </figure>
-            </div>
+            <ul id="systems" data-role="controlgroup">
+                <li><a href="#" data-ajax="false" data-role="button" data-icon="arrow-r" data-iconpos="right">PS3</a></li>
+                <li><a href="#" data-ajax="false" data-role="button" data-icon="arrow-r" data-iconpos="right">XBox</a></li>
+                <li><a href="#" data-ajax="false" data-role="button" data-icon="arrow-r" data-iconpos="right">PC</a></li>
+                <li><a href="#" data-ajax="false" data-role="button" data-icon="arrow-r" data-iconpos="right">Wii-U</a></li>
+                <li><a href="#" data-ajax="false" data-role="button" data-icon="arrow-r" data-iconpos="right">Wii</a></li>
+                <li><a href="#" data-ajax="false" data-role="button" data-icon="arrow-r" data-iconpos="right">DS</a></li>
+            </ul>
         </section>
-
     </div><!-- home page -->
 
     <!-- Add Item Page -->
@@ -97,6 +78,7 @@
                     <dt><label class="form-label" for="category">Category:</label></dt>
                     <dd>
                         <select title="Category" id="category" name="category">
+                            <option value="">&ndash;&ndash; Choose &ndash;&ndash;</option>
                         </select>
                     </dd>
 
@@ -121,15 +103,16 @@
                     <!-- Checked Thoroughly? -->
                     <dt><label class="form-label" for="thorough">Tested thoroughly?</label></dt>
                     <dd><input title="Tested Thoroughly?" type="checkbox" checked id="thorough" name="thorough" required /></dd>
+                    <dd class="hint">Was this tested thoroughly by you?</dd>
 
                     <!-- Full Description -->
                     <dt><label class="form-label" for="description">Description:</label></dt>
                     <dd><textarea title="Description" id="description" required></textarea></dd>
+                    <dd class="hint">e.g. &quot;Enter this code on the pause screen.&quot;</dd>
 
                     <!-- Date Found -->
-                    <dt><label class="form-label" for="date">Date Found:</label></dt>
+                    <dt><label class="form-label" for="date">Date Found:</label><span class="error"></span></dt>
                     <dd><input title="Date Found" id="date" type="date" name="date" data-clear-btn="true" required /></dd>
-
                 </dl>
 
                 <input type="submit" data-role="button" value="Add / Update" />
