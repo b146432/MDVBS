@@ -2,7 +2,7 @@
 /*
     Cheat Codes
     Michael Behan 1303
-    MIU Project 1
+    MIU Project 3
 */
 * {
     margin: 0;
@@ -105,8 +105,6 @@ section {
 }
 
 label.error {
-    color: #F00;
-    padding-left: 10px;
+    color: rgb(230, 20, 20);
     display: block;
-    float: left;
 }

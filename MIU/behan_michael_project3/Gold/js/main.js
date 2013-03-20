@@ -1,5 +1,5 @@
 // MIU 1303
-// Project 1
+// Project 3
 // Michael Behan
 
 // Auto-executing closure
@@ -7,7 +7,7 @@
 
     // Show Body
     // (Combats undesired FOUC effects)
-    $('body').fadeIn();
+    $('body').show();
 
     var $validator = $('#cheat-form').validate({
        rules:{
@@ -53,7 +53,7 @@
                required: "Please provide a description (how to reproduce)."
            },
            date:{
-               required: "Please enter the date this was found."
+               required: "Please enter the date on which this was found."
            }
        }
     });
@@ -489,12 +489,13 @@
             ],
             i = 0,
             len = links.length,
-            $ul = $('<ul/>');
+            $ul = $('<ul/>'),
+            $li;
 
         $ul.appendTo($navigation);
 
         $.each(links, function(idx) {
-            var $li = $('<li/>'),
+            $li = $('<li/>'),
                 $anchor = $('<a/>',{
                     href: links[idx].href,
                     'data-icon': links[idx].icon
