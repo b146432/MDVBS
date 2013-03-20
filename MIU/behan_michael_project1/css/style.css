@@ -1,8 +1,8 @@
 @charset "UTF-8";
 /*
     Cheat Codes
-    Michael Behan 1302
-    VFW Project 4
+    Michael Behan 1303
+    MIU Project 1
 */
 
 * {
@@ -11,18 +11,70 @@
 }
 
 body {
-    font: 1.2em Avenir, Verdana, Serif;
-    background-color: #0059b1;
+    font: 1.2em Monospace;
+    background-color: rgb(245, 245, 245);
+    color: rgb(42, 42, 42);
 }
 
 body.index {
-    text-align: center;
+    text-align: left;
     background-color: rgb(230, 230, 230);
+}
+
+body.index #feature h1 {
+    position: absolute;
+    left: -1000px;
+}
+
+body.index #feature img {
+    display: block;
+    width: 315px;
+    margin: 0.5em auto 0.5em auto;
+}
+
+body.index h2 {
+    font: bold 1.2em Monospace;
+    line-height: 1.5em;
 }
 
 body.index a {
     color: rgb(42, 42, 17);
 }
+
+body.index #systems li {
+    display: block;
+    width: 100%;
+    background-color: rgb(100, 100, 100);
+}
+
+body.index #search {
+    font-family: Monospace;
+}
+
+body.index #systems li a {
+    display: block;
+    width: 100%;
+    color: rgb(240, 240, 240);
+    line-height: 1.5em;
+    text-indent: 0.3em;
+    padding: 0.2em 0 0.2em 0;
+    letter-spacing: 0.03em;
+    font-size: 1em;
+    padding: 0.2em;
+    text-align: left;
+    text-shadow: rgb(40, 40, 40) 2px 2px 4px;
+    color: rgb(235, 235, 235);
+    background: #1e5799; /* Old browsers */
+    background: -moz-linear-gradient(top,  #1e5799 0%, #207cca 44%, #7db9e8 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1e5799), color-stop(44%,#207cca), color-stop(100%,#7db9e8)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #1e5799 0%,#207cca 44%,#7db9e8 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #1e5799 0%,#207cca 44%,#7db9e8 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #1e5799 0%,#207cca 44%,#7db9e8 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #1e5799 0%,#207cca 44%,#7db9e8 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 ); /* IE6-9 */
+    border-bottom: 2px solid rgb(180, 180, 180);
+}
+
 
 nav {
     display: block;
@@ -75,7 +127,7 @@ h1 {
     padding: 0.2em;
     text-align: center;
     text-shadow: rgb(40, 40, 40) 2px 2px 4px;
-    color: rgb(235, 235, 235);
+    color: rgb(250, 250, 250);
     background: #1e5799; /* Old browsers */
     background: -moz-linear-gradient(top,  #1e5799 0%, #207cca 44%, #7db9e8 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1e5799), color-stop(44%,#207cca), color-stop(100%,#7db9e8)); /* Chrome,Safari4+ */
@@ -239,4 +291,16 @@ button {
     line-height: 3em;
 }
 
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Styles specific to 404 page
+ */
+body.error-404 {
+    text-align: center;
+}
+
+body.error-404 a {
+    display: block;
+    font-size: 1.3em;
+    padding-top: 2em;
+}
 

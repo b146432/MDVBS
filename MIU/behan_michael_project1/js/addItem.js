@@ -1,59 +1,9 @@
-// VFW 1302
-// Project 4
+// MIU 1303
+// Project 1
 // Michael Behan
 
 // Auto-executing closure
 (function() {
-
-    // JSON Stubs for pre-loading.
-    // @TODO: Remove before this goes live!
-    var stubs = [
-        {
-            "game": "Skyrim",
-            "category": "glitch",
-            "systems": "ps3,xbox,pc",
-            "code": "N/A",
-            "author": "The Bobs",
-            "ease": 20,
-            "thorough": "on",
-            "description": "Skyrim - Dragonborn DLC. This is pretty awesome. Just walk through the left wall in Windhelm.",
-            "date": "2013-02-28"
-        },
-        {
-            "game": "Red Dead Redemptiomn",
-            "category": "cheatcode",
-            "systems": "ps3,xbox",
-            "code": "N/A",
-            "author": "Michael Berhan",
-            "ease": 50,
-            "thorough": "on",
-            "description": "Get all the outfits and you will get a better one to boot.",
-            "date": "2013-02-28"
-        },
-        {
-            "game": "Dragon Age",
-            "category": "glitch",
-            "systems": "ps3",
-            "code": "N/A",
-            "author": "Jenny",
-            "ease": 75,
-            "thorough": "on",
-            "description": "Talk to Duncan 5 times then attack him.",
-            "date": "2013-02-28"
-        },
-        {
-            "game": "Crash Bandicoot",
-            "category": "secret",
-            "systems": "ps3",
-            "code": "N/A",
-            "author": "The Bobs",
-            "ease": 1,
-            "thorough": "on",
-            "description": "Find all gems in every stage.",
-            "date": "2013-02-28"
-        }
-    ];
-
 
     // Define variables
     var $ = function (id) {
@@ -79,7 +29,7 @@
                 pattern: /^on$/
             },
             'ease': {
-                pattern: /\d+/,
+                pattern: /\d+/
             },
             'description': {
                 pattern: /\w+/
@@ -109,10 +59,10 @@
         var key = null,
             o   = null;
 
-        for (o in stubs) {
+        for (o in json) {
             key = getRandomKey();
-            stubs[o].key = key;
-            localStorage.setItem(key, JSON.stringify(stubs[o]));
+            json[o].key = key;
+            localStorage.setItem(key, JSON.stringify(json[o]));
         }
 
         // Set a flag in local storage that says stubs have

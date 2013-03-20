@@ -1,8 +1,8 @@
 Michael Behan's github for Mobile Interfaces & Usability:
 
-Master:
+gh-pages:
 https://github.com/b146432/MDVBS/tree/gh-pages/MIU
 
-Dev:
-https://github.com/b146432/MDVBS/blob/dev/MIU/
+master:
+https://github.com/b146432/MDVBS/tree/master/MIU/
 
