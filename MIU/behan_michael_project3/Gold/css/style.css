@@ -98,5 +98,6 @@ section {
 
 label.error {
     color: #F00;
-    padding-left: 1em;
+    padding-left: 10px;
+    display: block;
 }

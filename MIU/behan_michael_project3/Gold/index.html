@@ -71,8 +71,6 @@
                     <img src="img/ds.png" alt="ds" />
                     <figcaption class="imgCaption">DS</figcaption>
                 </figure>
-
-
             </div>
         </section>
 
@@ -93,7 +91,7 @@
                 <dl>
                     <!-- Game Title -->
                     <dt><label class="form-label" for="game">Game Title:</label></dt>
-                    <dd><input title="Game Title" type="text"  id="game" name="game" /></dd>
+                    <dd><input title="Game Title" type="text"  id="game" placeholder="e.g. Skyrim" name="game" data-clear-btn="true" /></dd>
 
                     <!-- Category -->
                     <dt><label class="form-label" for="category">Category:</label></dt>
@@ -114,11 +112,11 @@
 
                     <!-- Cheat Code -->
                     <dt><label class="form-label" for="code">Code:</label></dt>
-                    <dd><input title="Code" type="text" id="code" name="code" required /></dd>
+                    <dd><input title="Code" type="text" id="code" placeholder="e.g. Up Up Square Triangle Select Start" name="code" data-clear-btn="true" equired /></dd>
 
                     <!-- Author -->
                     <dt><label class="form-label" for="author">Author Name:</label></dt>
-                    <dd><input title="Author Name" type="text" id="author" name="author" required /></dd>
+                    <dd><input title="Author Name" type="text" id="author" name="author" placeholder="First and Last name" data-clear-btn="true" required /></dd>
 
                     <!-- Checked Thoroughly? -->
                     <dt><label class="form-label" for="thorough">Tested thoroughly?</label></dt>
@@ -126,11 +124,11 @@
 
                     <!-- Full Description -->
                     <dt><label class="form-label" for="description">Description:</label></dt>
-                    <dd><textarea title="Description" id="description" name="description" required></textarea></dd>
+                    <dd><textarea title="Description" id="description" required></textarea></dd>
 
                     <!-- Date Found -->
                     <dt><label class="form-label" for="date">Date Found:</label></dt>
-                    <dd><input title="Date Found" id="date" type="date" name="date" required /></dd>
+                    <dd><input title="Date Found" id="date" type="date" name="date" data-clear-btn="true" required /></dd>
 
                 </dl>
 
@@ -161,6 +159,47 @@
     <div id="about" data-role="page" data-add-back-btn="true" data-theme="b">
         <header data-role="header">
             <h3>About</h3>
+        </header>
+
+        <br />
+
+        <section>
+            <header>
+                <h4>Git Repo</h4>
+            </header>
+            <p>
+                <a
+                    href="https://github.com/b146432/MDVBS/tree/gh-pages/MIU/behan_michael_project3"
+                    title="MIU Project 3 Git Repository (opens in new tab/window)"
+                    target="_blank">MIU Project 3 GIT Repository</a>
+            </p>
+        </section>
+
+        <section>
+            <header>
+                <h4>Bronze</h4>
+            </header>
+
+            <header>
+                <h5><a href="../Bronze/index.html" data-ajax="false" title="Bronze App">Bronze App</a></h5>
+            </header>
+        </section>
+
+        <section>
+            <header>
+                <h4>Home</h4>
+            </header>
+
+            <header>
+                <h5><a href="#home" title="Go Home">Go Home</a></h5>
+            </header>
+        </section>
+
+        <section>
+            <header>
+                <h4>About the Author</h4>
+            </header>
+
             <p>
                 Originally from Philly, Michael Behan lives in the Orlando area and works full time
                 for Walt Disney Parks &amp; Resorts Online (WDPRO) as a web and mobile engineer.
@@ -174,7 +213,7 @@
                 reading books on philosophy and quantum mechanics,
                 playing guitar, keyboard, double-flute, mandolin and didjerido.
             </p>
-        </header>
+        </section>
     </div><!-- about page -->
 
     <div id="news" data-role="page" data-add-back-btn="true" data-theme="b">

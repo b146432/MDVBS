@@ -29,6 +29,26 @@
            date:{
                required: true
            }
+       },
+       messages:{
+           game:{
+               required: "Please enter a game title."
+           },
+           code:{
+               required: "Please enter a code or N/A."
+           },
+           author:{
+               required: "Please enter your name."
+           },
+           thorough:{
+               required: "Please specifify if this was tested thoroughly."
+           },
+           description:{
+               required: "Please provide a description (how to reproduce)."
+           },
+           date:{
+               required: "Please enter the date this was found."
+           }
        }
     });
 
@@ -335,6 +355,16 @@
 
     // Set event bindings for various elements.
     var setupEvents = function() {
+
+        $(FORM_FIELDS).each(function(idx, value) {
+            $field = $('#' + value);
+
+            console.log($field);
+
+            $field.on('blur change', function() {
+                $(this).valid();
+            });
+        });
 
         $('#cheat-form').on('submit', function(evt) {
            evt.preventDefault();
