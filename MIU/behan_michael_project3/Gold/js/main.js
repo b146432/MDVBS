@@ -14,6 +14,9 @@
            game:{
                required: true,
            },
+           systems: {
+               required: true
+           },
            code:{
                required: true
            },
@@ -33,6 +36,9 @@
        messages:{
            game:{
                required: "Please enter a game title."
+           },
+           systems:{
+               required: "Please choose at least 1 system."
            },
            code:{
                required: "Please enter a code or N/A."
@@ -512,5 +518,4 @@
        loadNavigationInPage($(val));
     });
 
-
-}) (jQuery);
+})(jQuery);
