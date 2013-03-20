@@ -14,6 +14,10 @@
     margin-left: 10%;
 }
 
+div[data-role=fieldcontain] {
+    clear: both;
+}
+
 #feature img {
     display: block;
     margin: 0 auto;
@@ -104,6 +108,9 @@ section {
 }
 
 label.error {
-    color: rgb(230, 20, 20);
-    display: block;
+    float: left;
+	color: red;
+	padding-top: .5em;
+	vertical-align: top;
+	font-weight:bold
 }

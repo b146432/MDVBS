@@ -60,7 +60,15 @@
            },
            date:{
                required: "Please enter the date on which this was found."
-           }
+           },
+           errorPlacement: function(error, element) {
+               console.log(element);
+       			if (element.attr('name') === 'systems') {
+       				error.insertAfter($(element).parent());
+       			} else {
+       				error.insertAfter(element);
+       			}
+       		}
        }
     });
 
