@@ -124,16 +124,13 @@
 
     // Return an array of selected systems
     var getSelectedSystems = function() {
-        var systems = [];
+        $systems = $('#systems');
 
-        $('[name=systems]').each(function() {
-            var $this = $(this);
-            if ($this.attr('checked')) {
-                systems.push($this.attr('value'));
-            }
-        });
+        if ($systems.val()) {
+            return $('#systems').val().join(',');
+        }
 
-        return systems.join(',');
+        return [];
     };
 
     // Store data from the form and add/append it
@@ -166,7 +163,6 @@
         if ($keyInput.attr('value') !== '') {
             obj.key = $keyInput.attr('value');
             localStorage.setItem(obj.key, JSON.stringify(obj));
-            console.log(obj);
         } else {
             localStorage.setItem(key, JSON.stringify(obj));
         }
@@ -250,7 +246,6 @@
             } else if (o === 'description') {
                 $('#description').html(data[o]);
             } else if (o === 'thorough') {
-                console.log('thorough', data[o]);
                 $('#thorough option[value="' + data[o] + '"]').attr('selected', true);
             } else {
                 // Handle all other fields:
@@ -376,6 +371,10 @@
     // Set event bindings for various elements.
     var setupEvents = function() {
 
+        $('input[type="reset"]').click(function() {
+            window.scrollTo(0,0);
+        });
+
         $('#browse h3').click(function() {
             $('html, body').animate({scrollTop: $(document).height()});
         });
@@ -423,25 +422,6 @@
             var system = $(this).find('span.ui-btn-text').html().toLowerCase();
             displayStoredCheats(system, null);
             $.mobile.changePage($('#show'), 'slide', true, true);
-        });
-
-        $('#save').click(function(evt) {
-            var result = storeCheat(),
-                $errorDiv = $('#error');
-
-            evt.preventDefault();
-
-            if (result) {
-                alert('Saved!');
-                location.reload();
-                // Scroll to top
-                window.scrollTo(0,0);
-            } else {
-                // Scroll to top
-                window.scrollTo(0,0);
-                $errorDiv.hide();
-                return false;
-            }
         });
 
         $('#clear-storage').click(function(evt) {
