@@ -60,15 +60,7 @@
            },
            date:{
                required: "Please enter the date on which this was found."
-           },
-           errorPlacement: function(error, element) {
-               console.log(element);
-       			if (element.attr('name') === 'systems') {
-       				error.insertAfter($(element).parent());
-       			} else {
-       				error.insertAfter(element);
-       			}
-       		}
+           }
        }
     });
 
@@ -81,8 +73,7 @@
         CATEGORIES       = ['Cheat Code', 'Secret', 'Glitch'],
         CheatCode        = function () {},
         STUBS_LOADED_KEY = 'cheat-codes-stubs-loaded', // @TODO Remove before go-live!
-        displayStoredCheats,
-        systems
+        displayStoredCheats;
 
     // Generate random key for localStorage.
     // @return string
@@ -240,7 +231,7 @@
     var editCode = function(id) {
         var key  = id.split('-')[1],
             data = JSON.parse(localStorage.getItem(key)),
-            i, len, o, option, systems;
+            i, len, o, option, systems, $systems = $('#systems');
 
         // Loop through owned properties and pre-fill the
         // form fields for editing.
@@ -254,12 +245,17 @@
                 }
 
                 $(systems).each(function(idx, value) {
-                    $('input[value="' + value + '"]').click();
+                    $systems.find('option[value="' + value + '"]').attr('selected', true);
                 });
+            } else if (o === 'description') {
+                $('#description').html(data[o]);
+            } else if (o === 'thorough') {
+                console.log('thorough', data[o]);
+                $('#thorough option[value="' + data[o] + '"]').attr('selected', true);
+            } else {
+                // Handle all other fields:
+                $('#' + o).attr('value', data[o]);
             }
-
-            // Handle all other fields:
-            $('#' + o).attr('value', data[o]);
         }
 
         $.mobile.changePage($("#add-or-edit"), "slide", true, true);
@@ -273,9 +269,11 @@
             return false;
         }
 
-        localStorage.removeItem(id.toString);
+        id = id.split('-')[1];
 
-        $('#' + id).animate({
+        localStorage.removeItem(id.toString());
+
+        $('#entry-' + id).animate({
            'opacity': 0,
         }).slideUp();
     };
@@ -288,6 +286,8 @@
             $display  = $('#display'),
             $article, $dl, $dt, $dd, o, $aside, i, len,
             $editButton, $deleteButton;
+
+        $('#display').empty(); // clear current displayed cheats if any
 
         len = data.length;
         if (len === 0) {
@@ -376,10 +376,16 @@
     // Set event bindings for various elements.
     var setupEvents = function() {
 
+        $('#browse h3').click(function() {
+            $('html, body').animate({scrollTop: $(document).height()});
+        });
+
+        $('#add-or-edit').on('pageshow', function() {
+            $('#cheat-form').get(0).reset();
+        });
+
         $(FORM_FIELDS).each(function(idx, value) {
             $field = $('#' + value);
-
-            console.log($field);
 
             $field.on('blur change', function() {
                 $(this).valid();
@@ -412,7 +418,7 @@
             return false;
         });
 
-        $('ul#systems li a').on('click', function(evt) {
+        $('ul#affectedSystems li a').on('click', function(evt) {
             evt.preventDefault();
             var system = $(this).find('span.ui-btn-text').html().toLowerCase();
             displayStoredCheats(system, null);
@@ -509,12 +515,12 @@
         $ul.appendTo($navigation);
 
         $.each(links, function(idx) {
-            $li = $('<li/>'),
-                $anchor = $('<a/>',{
-                    href: links[idx].href,
-                    'data-icon': links[idx].icon
-                });
-                $anchor.html(links[idx].text);
+            $li     = $('<li/>'),
+            $anchor = $('<a/>',{
+                href: links[idx].href,
+                'data-icon': links[idx].icon
+            });
+            $anchor.html(links[idx].text);
 
             $anchor.appendTo($li);
             $li.appendTo($ul);
@@ -527,7 +533,8 @@
     loadStubs(); // @TODO: Remove before this goes live!
     setupEvents();
     populateCategory();
-    // Good defaults setup:
+
+    // Sensible defaults setup:
     $('#date').attr('value', moment().format('YYYY-MM-DD'));
 
     // Initalize toolbars on all pages

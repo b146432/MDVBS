@@ -49,20 +49,6 @@ section {
     color: rgb(240, 40, 40);
 }
 
-#add-or-edit dt, dd {
-    display: block;
-}
-
-#add-or-edit dt {
-    margin-top: 2em;
-}
-
-#add-or-edit dd {
-    padding-bottom: 15px;
-    border-bottom: 1px inset rgb(200, 200, 200);
-    width: 100%;
-}
-
 #add-or-edit span.hint {
     display: block;
     font-size: 0.8em;
