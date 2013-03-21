@@ -2,7 +2,7 @@
 /*
     Cheat Codes
     Michael Behan 1303
-    MIU Project 1
+    MIU Project 3
 */
 * {
     margin: 0;
@@ -14,6 +14,10 @@
     margin-left: 10%;
 }
 
+div[data-role=fieldcontain] {
+    clear: both;
+}
+
 #feature img {
     display: block;
     margin: 0 auto;
@@ -23,22 +27,33 @@ section {
     margin-bottom: 1.5em;
 }
 
+#systems figure {
+    margin: 20px;
+    width: 44px;
+    height: 44px;
+}
+
+#systems figure figcaption {
+    width: 100%;
+    text-align: center;
+    margin-top: -20px;
+}
+
+#systems figure img  {
+    width: 100%;
+    height: auto;
+    margin: 10px;
+}
+
 #add-or-edit legend {
     color: rgb(240, 40, 40);
 }
 
-#add-or-edit dt, dd {
+#add-or-edit span.hint {
     display: block;
-}
-
-#add-or-edit dt {
-    margin-top: 2em;
-}
-
-#add-or-edit dd {
-    padding-bottom: 15px;
-    border-bottom: 1px inset rgb(200, 200, 200);
-    width: 100%;
+    font-size: 0.8em;
+    color: rgb(70, 70, 70);
+    margin-top: 5px;
 }
 
 #about p {
@@ -79,6 +94,9 @@ section {
 }
 
 label.error {
-    color: #F00;
-    padding-left: 1em;
+    float: left;
+	color: red;
+	padding-top: .5em;
+	vertical-align: top;
+	font-weight:bold
 }

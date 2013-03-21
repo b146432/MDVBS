@@ -1,5 +1,5 @@
 // MIU 1303
-// Project 1
+// Project 3
 // Michael Behan
 
 // Auto-executing closure
@@ -7,12 +7,18 @@
 
     // Show Body
     // (Combats undesired FOUC effects)
-    $('body').fadeIn();
+    $('body').show();
 
     var $validator = $('#cheat-form').validate({
        rules:{
            game:{
-               required: true,
+               required: true
+           },
+           category:{
+               required: true
+           },
+           systems: {
+               required: true
            },
            code:{
                required: true
@@ -29,6 +35,32 @@
            date:{
                required: true
            }
+       },
+       messages:{
+           game:{
+               required: "Please enter a game title."
+           },
+           category:{
+               required: 'Please select a category.'
+           },
+           systems:{
+               required: "Please choose at least 1 system."
+           },
+           code:{
+               required: "Please enter a code or N/A."
+           },
+           author:{
+               required: "Please enter your name."
+           },
+           thorough:{
+               required: "Please specifify if this was tested thoroughly."
+           },
+           description:{
+               required: "Please provide a description (how to reproduce)."
+           },
+           date:{
+               required: "Please enter the date on which this was found."
+           }
        }
     });
 
@@ -36,13 +68,12 @@
     var CATEGORY_ID = 'category',
         // These are the form fields we will loop through.
         // The systems field is not included because it is a special case (multi-select)
-        FORM_FIELDS      = ['game', 'systems', 'code', 'author', 'thorough', 'description', 'date'],
+        FORM_FIELDS      = ['game', 'systems', 'category', 'code', 'author', 'thorough', 'description', 'date'],
         SYSTEMS          = ['xbox', 'ps3', 'pc', 'wii', 'wii-u', 'ds'],
         CATEGORIES       = ['Cheat Code', 'Secret', 'Glitch'],
         CheatCode        = function () {},
         STUBS_LOADED_KEY = 'cheat-codes-stubs-loaded', // @TODO Remove before go-live!
-        displayStoredCheats,
-        systems
+        displayStoredCheats;
 
     // Generate random key for localStorage.
     // @return string
@@ -93,16 +124,13 @@
 
     // Return an array of selected systems
     var getSelectedSystems = function() {
-        var systems = [];
+        $systems = $('#systems');
 
-        $('[name=systems]').each(function() {
-            var $this = $(this);
-            if ($this.attr('checked')) {
-                systems.push($this.attr('value'));
-            }
-        });
+        if ($systems.val()) {
+            return $('#systems').val().join(',');
+        }
 
-        return systems.join(',');
+        return [];
     };
 
     // Store data from the form and add/append it
@@ -135,7 +163,6 @@
         if ($keyInput.attr('value') !== '') {
             obj.key = $keyInput.attr('value');
             localStorage.setItem(obj.key, JSON.stringify(obj));
-            console.log(obj);
         } else {
             localStorage.setItem(key, JSON.stringify(obj));
         }
@@ -200,7 +227,7 @@
     var editCode = function(id) {
         var key  = id.split('-')[1],
             data = JSON.parse(localStorage.getItem(key)),
-            i, len, o, option, systems;
+            i, len, o, option, systems, $systems = $('#systems');
 
         // Loop through owned properties and pre-fill the
         // form fields for editing.
@@ -214,12 +241,16 @@
                 }
 
                 $(systems).each(function(idx, value) {
-                    $('input[value="' + value + '"]').click();
+                    $systems.find('option[value="' + value + '"]').attr('selected', true);
                 });
+            } else if (o === 'description') {
+                $('#description').html(data[o]);
+            } else if (o === 'thorough') {
+                $('#thorough option[value="' + data[o] + '"]').attr('selected', true);
+            } else {
+                // Handle all other fields:
+                $('#' + o).attr('value', data[o]);
             }
-
-            // Handle all other fields:
-            $('#' + o).attr('value', data[o]);
         }
 
         $.mobile.changePage($("#add-or-edit"), "slide", true, true);
@@ -233,9 +264,11 @@
             return false;
         }
 
-        localStorage.removeItem(id.toString);
+        id = id.split('-')[1];
 
-        $('#' + id).animate({
+        localStorage.removeItem(id.toString());
+
+        $('#entry-' + id).animate({
            'opacity': 0,
         }).slideUp();
     };
@@ -248,6 +281,8 @@
             $display  = $('#display'),
             $article, $dl, $dt, $dd, o, $aside, i, len,
             $editButton, $deleteButton;
+
+        $('#display').empty(); // clear current displayed cheats if any
 
         len = data.length;
         if (len === 0) {
@@ -336,6 +371,26 @@
     // Set event bindings for various elements.
     var setupEvents = function() {
 
+        $('input[type="reset"]').click(function() {
+            window.scrollTo(0,0);
+        });
+
+        $('#browse h3').click(function() {
+            $('html, body').animate({scrollTop: $(document).height()});
+        });
+
+        $('#add-or-edit').on('pageshow', function() {
+            $('#cheat-form').get(0).reset();
+        });
+
+        $(FORM_FIELDS).each(function(idx, value) {
+            $field = $('#' + value);
+
+            $field.on('blur change', function() {
+                $(this).valid();
+            });
+        });
+
         $('#cheat-form').on('submit', function(evt) {
            evt.preventDefault();
            if ($(this).valid()) {
@@ -362,30 +417,11 @@
             return false;
         });
 
-        $('ul#systems li a').on('click', function(evt) {
+        $('ul#affectedSystems li a').on('click', function(evt) {
             evt.preventDefault();
             var system = $(this).find('span.ui-btn-text').html().toLowerCase();
             displayStoredCheats(system, null);
             $.mobile.changePage($('#show'), 'slide', true, true);
-        });
-
-        $('#save').click(function(evt) {
-            var result = storeCheat(),
-                $errorDiv = $('#error');
-
-            evt.preventDefault();
-
-            if (result) {
-                alert('Saved!');
-                location.reload();
-                // Scroll to top
-                window.scrollTo(0,0);
-            } else {
-                // Scroll to top
-                window.scrollTo(0,0);
-                $errorDiv.hide();
-                return false;
-            }
         });
 
         $('#clear-storage').click(function(evt) {
@@ -453,17 +489,18 @@
             ],
             i = 0,
             len = links.length,
-            $ul = $('<ul/>');
+            $ul = $('<ul/>'),
+            $li;
 
         $ul.appendTo($navigation);
 
         $.each(links, function(idx) {
-            var $li = $('<li/>'),
-                $anchor = $('<a/>',{
-                    href: links[idx].href,
-                    'data-icon': links[idx].icon
-                });
-                $anchor.html(links[idx].text);
+            $li     = $('<li/>'),
+            $anchor = $('<a/>',{
+                href: links[idx].href,
+                'data-icon': links[idx].icon
+            });
+            $anchor.html(links[idx].text);
 
             $anchor.appendTo($li);
             $li.appendTo($ul);
@@ -477,10 +514,12 @@
     setupEvents();
     populateCategory();
 
+    // Sensible defaults setup:
+    $('#date').attr('value', moment().format('YYYY-MM-DD'));
+
     // Initalize toolbars on all pages
     $(['#home', '#add-or-edit', '#show', '#about', '#news']).each(function(idx, val) {
        loadNavigationInPage($(val));
     });
 
-
-}) (jQuery);
+})(jQuery);
