@@ -418,13 +418,6 @@
             return false;
         });
 
-        $('ul#affectedSystems li a').on('click', function(evt) {
-            evt.preventDefault();
-            var system = $(this).find('span.ui-btn-text').html().toLowerCase();
-            displayStoredCheats(system, null);
-            $.mobile.changePage($('#show'), 'slide', true, true);
-        });
-
         $('#clear-storage').click(function(evt) {
             evt.preventDefault();
             localStorage.clear();
