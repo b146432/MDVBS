@@ -27,22 +27,23 @@ section {
     margin-bottom: 1.5em;
 }
 
-#systems figure {
-    margin: 20px;
-    width: 44px;
+#browse div.ui-grid-b {
+    margin-top: 1px;
+}
+
+#browse div.ui-bar img {
+    display: block;
     height: 44px;
+    width: 44px;
+    margin: 0 auto;
 }
 
-#systems figure figcaption {
-    width: 100%;
+#browse div.ui-bar p {
+    display: block;
+    width: 44px;
+    margin: 0 auto;
     text-align: center;
-    margin-top: -20px;
-}
-
-#systems figure img  {
-    width: 100%;
-    height: auto;
-    margin: 10px;
+    padding-top: 4px;
 }
 
 #add-or-edit legend {

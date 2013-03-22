@@ -375,8 +375,9 @@
             window.scrollTo(0,0);
         });
 
-        $('#browse h3').click(function() {
-            $('html, body').animate({scrollTop: $(document).height()});
+        $('#browse div[title]').click(function() {
+            displayStoredCheats($(this).attr('title'));
+            $.mobile.changePage($('#show'), 'slide', true, true);
         });
 
         $('#add-or-edit').on('pageshow', function() {
