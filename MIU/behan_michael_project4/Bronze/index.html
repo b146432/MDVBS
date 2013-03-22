@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<!--
+    Cheat Codes
+    Michael Behan 1303
+    MIU Project 4
+-->
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="description" content="View and Add Cheat Codes for Video Games" />
+    <meta name="keywords" content="cheat codes,codes,games,video games,find cheat" />
+    <meta name="author" content="Michael Behan" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1" />
+    <meta name="viewport" content="target-densitydpi=device-dpi" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <title>Cheat Codes</title>
+    <link rel="stylesheet" href="css/jquery.mobile-1.2.0.min.css" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javscript" src="js/lib/modernizr-2.6.2.min.js"></script>
+</head>
+<body hidden>
+    <!-- Home Page -->
+    <div id="home" data-role="page" data-theme="b">
+        <section id="feature">
+            <header data-role="header">
+                <h1>Cheats, Secrets, Glitches</h1>
+            </header>
+            <a href="#add-or-edit"><img src="img/index-cta.png" alt="Cheats, Secrets, Glitches - Add yours!"></a>
+        </section>
+
+        <section id="search">
+            <header>
+                <h3>Search</h3>
+            </header>
+            <form id="search-form" action="#" method="post">
+                <input type="search" data-mini="true" placeholder="Search&hellip;" id="search-box">
+            </form>
+        </section>
+
+        <section id="browse">
+            <header data-role="header">
+                <h4>Browse by System</h4>
+            </header>
+
+            <div data-role="collapsible">
+                <h3>Show Systems</h3>
+                <ul id="affectedSystems" data-role="controlgroup">
+                    <li><a href="#" data-ajax="false" data-role="button" data-theme="a" data-icon="arrow-r" data-iconpos="right">PS3</a></li>
+                    <li><a href="#" data-ajax="false" data-role="button" data-theme="a" data-icon="arrow-r" data-iconpos="right">XBox</a></li>
+                    <li><a href="#" data-ajax="false" data-role="button" data-theme="a" data-icon="arrow-r" data-iconpos="right">PC</a></li>
+                    <li><a href="#" data-ajax="false" data-role="button" data-theme="a" data-icon="arrow-r" data-iconpos="right">Wii-U</a></li>
+                    <li><a href="#" data-ajax="false" data-role="button" data-theme="a" data-icon="arrow-r" data-iconpos="right">Wii</a></li>
+                    <li><a href="#" data-ajax="false" data-role="button" data-theme="a" data-icon="arrow-r" data-iconpos="right">DS</a></li>
+                </ul>
+            </div>
+        </section>
+    </div><!-- home page -->
+
+    <!-- Add Item Page -->
+    <div id="add-or-edit" data-role="page" data-add-back-btn="true" data-theme="b">
+        <header data-role="header">
+            <h1>Add / Update Cheat Code</h1>
+        </header>
+
+        <form id="cheat-form" method="post">
+            <input type="hidden" id="key" name="key" value="" /><!-- for editing existing entries -->
+            <fieldset>
+                <legend>All fields are required.</legend>
+
+                <!-- begin form elements -->
+                    <!-- Game Title -->
+                    <div data-role="fieldcontain">
+                        <label class="form-label" for="game">Game Title:</label>
+                        <input title="Game Title" type="text"  id="game" placeholder="e.g. Skyrim" name="game" data-clear-btn="true" />
+                    </div>
+
+                    <!-- Category -->
+                    <div data-role="fieldcontain">
+                        <label class="form-label" for="category">Category:</label>
+                        <select title="Category" data-placeholder="true" data-native-menu="false" id="category" name="category">
+                            <option>&ndash;&ndash; Choose &ndash;&ndash;</option>
+                        </select>
+                    </div>
+
+                    <!-- Affected game systems -->
+                    <div data-role="fieldcontain">
+                        <label class="form-label">Affected Game System(s):</label>
+                        <select title="Systems" id="systems" name="systems" data-native-menu="false" data-placeholder="true" multiple>
+                            <option>&ndash;&ndash; Choose &ndash;&ndash;</option>
+                            <option value="xbox">XBox</option>
+                            <option value="ps3">PS3</option>
+                            <option value="pc">PC</option>
+                            <option value="wii">Wii</option>
+                            <option value="wii-u">Wii-U</option>
+                        </select>
+                    </div>
+
+                    <!-- Cheat Code -->
+                    <div data-role="fieldcontain">
+                        <label class="form-label" for="code">Code:</label>
+                        <input title="Code" type="text" id="code" placeholder="e.g. Up Up Square Triangle Select Start" name="code" data-clear-btn="true" required />
+                    </div>
+
+                    <!-- Author -->
+                    <div data-role="fieldcontain">
+                        <label class="form-label" for="author">Author Name:</label>
+                        <input title="Author Name" type="text" id="author" name="author" placeholder="First and Last name" data-clear-btn="true" required />
+                    </div>
+
+                    <!-- Checked Thoroughly? -->
+                    <div data-role="fieldcontain">
+                        <label class="form-label" for="thorough">Thoroughly tested?</label>
+                        <select data-role="slider" id="thorough">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                        <span class="hint">Was this tested thoroughly by you?</span>
+                    </div>
+
+                    <!-- Full Description -->
+                    <div data-role="fieldcontain">
+                        <label class="form-label" for="description">Description:</label>
+                        <textarea title="Description" id="description" required></textarea>
+                        <span class="hint">e.g. &quot;Enter this code on the pause screen.&quot;</span>
+                    </div>
+
+                    <!-- Date Found -->
+                    <div data-role="fieldcontain">
+                        <label class="form-label" for="date">Date Found:</label>
+                        <input title="Date Found" id="date" type="date" name="date" data-clear-btn="true" required />
+                    </div>
+
+                    <div data-role="fieldcontain">
+                        <input type="submit" data-role="button" value="Add / Update" />
+                        <br />
+                        <input type="reset" value="Reset Form" data-theme="a" />
+                    </div>
+            </fieldset>
+        </form>
+    </div><!-- add item page -->
+
+    <div data-role="page" id="show" data-add-back-btn="true" data-theme="b">
+        <!-- Display Section -->
+        <section>
+            <header data-role="header">
+                <h3>Stored Cheats</h3>
+            </header>
+
+            <nav data-role="navbar">
+                <ul>
+                    <li><a id="clear-storage" href="#" title="Delete All Stored Cheats">Clear Stored Cheats</a></li>
+                </ul>
+            </nav>
+
+            <section id="display">
+            </section>
+            <!-- dynamically populated -->
+        </section>
+    </div><!-- stored cheats page -->
+
+    <div id="about" data-role="page" data-add-back-btn="true" data-theme="b">
+        <header data-role="header">
+            <h3>About</h3>
+        </header>
+
+        <br />
+
+        <section>
+            <header>
+                <h4>Git Repo</h4>
+            </header>
+            <p>
+                <a
+                    href="https://github.com/b146432/MDVBS/tree/gh-pages/MIU/behan_michael_project4"
+                    title="MIU Project 4 Git Repository (opens in new tab/window)"
+                    target="_blank">MIU Project 3 GIT Repository</a>
+            </p>
+        </section>
+
+        <section>
+            <header>
+                <h4>Gold</h4>
+            </header>
+
+            <header>
+                <h5><a href="../Gold/index.html" data-ajax="false" title="Gold App">Gold App</a></h5>
+            </header>
+        </section>
+
+        <section>
+            <header>
+                <h4>Home</h4>
+            </header>
+
+            <header>
+                <h5><a href="#home" title="Go Home">Go Home</a></h5>
+            </header>
+        </section>
+
+        <section>
+            <header>
+                <h4>About the Author</h4>
+            </header>
+
+            <p>
+                Originally from Philly, Michael Behan lives in the Orlando area and works full time
+                for Walt Disney Parks &amp; Resorts Online (WDPRO) as a web and mobile engineer.
+            </p>
+            <p>
+                Michael Behan began programming in Assembly x86 at age 15.<br>
+                After Asssembly he moved on to C, C++, Perl, PHP, Ruby, Java, HTML, CSS3 and JavaScript.
+            </p>
+            <p>
+                When not programming, Michael enjoys writing poetry,
+                reading books on philosophy and quantum mechanics,
+                playing guitar, keyboard, double-flute, mandolin and didjerido.
+            </p>
+        </section>
+    </div><!-- about page -->
+
+    <div id="news" data-role="page" data-add-back-btn="true" data-theme="b">
+        <header data-role="header">
+            <h3>Newsstand</h3>
+        </header>
+
+        <article>
+            <h4>Skyrim DLC Available on PS3</h4>
+            <aside>February 2nd, 2013</aside>
+            <p>After a year of waiting, the PS3 has finally received all DLC packs
+                that have been available only to Xbox users since early last year.
+            </p>
+        </article>
+
+        <article>
+            <h4>New Game Informer is Out!</h4>
+            <aside>January 28th, 2013</aside>
+            <p>
+                The latest Game Informer Magazine has awesome stuff!
+            </p>
+        </article>
+
+        <article>
+            <h4>Say Hello to the Wii-U</h4>
+            <aside>December 1st, 2012</aside>
+            <p>
+                Nintendo's new system, the Wii-U is available in stores now.
+            </p>
+        </article>
+
+        <article>
+            <h4>Michael Behan gets Hitched</h4>
+            <aside>October 30th, 2010</aside>
+            <p>
+                That's right! Jennifer Glass and Michael Behan have officially tied the knot!
+            </p>
+        </article>
+
+        <article>
+            <h4>Hello, WDPRO</h4>
+            <aside>February 2nd, 2008</aside>
+            <p>
+                Michael Behan has just joined the WDPRO team as a web developer.
+            </p>
+        </article>
+    </div><!-- news page -->
+
+
+    <script type="text/javascript" src="js/lib/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.mobile-1.2.0.min.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="js/lib/moment.js"></script>
+    <script type="text/javascript" src="js/JSON.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
