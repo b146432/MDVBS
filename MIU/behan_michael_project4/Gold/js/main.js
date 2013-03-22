@@ -463,22 +463,26 @@
                 {
                     href: '#home',
                     icon: 'home',
-                    text: 'Home'
+                    text: 'Home',
+                    'data-ajax': false
                 },
                 {
                     href: '#add-or-edit',
                     icon: 'plus',
-                    text: 'Add'
+                    text: 'Add',
+                    'data-ajax': false
                 },
                 {
                     href: '#about',
                     icon: 'info',
-                    text: 'About'
+                    text: 'About',
+                    'data-ajax': false
                 },
                 {
                     href: '#news',
                     icon: 'check',
-                    text: 'News'
+                    text: 'News',
+                    'data-ajax': false
                 }
             ],
             i = 0,
