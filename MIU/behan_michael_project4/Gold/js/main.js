@@ -301,7 +301,9 @@
             for (o in data[i]) {
                 $dl = $('<dl/>');
 
-                if (o === 'key') {
+                if (o === 'undefined') {
+                    continue;
+                } else if (o === 'key') {
                     // Handle 'key'
                     $article.attr('id', ('entry-' + data[i][o]));
                 } else if (o === 'category') {
@@ -363,6 +365,9 @@
             $article.append($editButton);
             $article.append($deleteButton);
             $display.append($article);
+
+            // Trtgger JQM enhacenments (e.g. on edit/delete button)
+            $display.trigger('create');
 
         } // end object loop
     };
