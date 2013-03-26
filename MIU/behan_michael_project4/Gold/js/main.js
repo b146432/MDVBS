@@ -364,6 +364,9 @@
             $article.append($deleteButton);
             $display.append($article);
 
+            // Refresh all JQM elements
+            $display.trigger('create');
+
         } // end object loop
     };
 
@@ -420,9 +423,11 @@
 
         $('#clear-storage').click(function(evt) {
             evt.preventDefault();
-            localStorage.clear();
-            alert('All cheat codes have been deleted.');
-            displayStoredCheats();
+            if (window.confirm('Are you sure you wish to delete all stored data?')) {
+                localStorage.clear();
+                alert('All cheat codes have been deleted.');
+                displayStoredCheats();
+            }
         });
     };
 
