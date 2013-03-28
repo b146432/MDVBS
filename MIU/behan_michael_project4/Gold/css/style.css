@@ -9,6 +9,13 @@
     padding: 0;
 }
 
+.ui-bar {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(98%,rgba(175,79,35,1)), color-stop(5%,rgba(96,56,19,1)));
+    color: #FFF;
+    text-shadow: #000 1px 1px 2px;
+    border: 1px solid #333;
+}
+
 .ui-header .ui-title {
     margin-right: 10%;
     margin-left: 10%;
