@@ -16,24 +16,25 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="MobileOptimized" content="320" />
     <title>Cheat Codes</title>
-    <link rel="stylesheet" href="css/jquery.mobile-1.2.0.min.css" />
+    <link rel="stylesheet" href="css/cheats.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile.structure-1.2.0.min.css" />
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/style.css" />
     <script type="text/javscript" src="js/lib/modernizr-2.6.2.min.js"></script>
 </head>
 <body hidden>
     <!-- Home Page -->
-    <div id="home" data-role="page" data-theme="b">
+    <div id="home" data-role="page" data-theme="c">
         <section id="feature">
             <header data-role="header">
                 <h1>Cheats, Secrets, Glitches</h1>
             </header>
-            <a href="#add-or-edit"><img src="img/index-cta.png" alt="Cheats, Secrets, Glitches - Add yours!"></a>
+            <a href="#add-or-edit" data-ajax="false"><img src="img/index-cta.png" alt="Cheats, Secrets, Glitches - Add yours!"></a>
         </section>
 
         <section id="search">
             <header>
-                <h3>Search</h3>
+                <h4>Search</h4>
             </header>
             <form id="search-form" action="#" method="post">
                 <input type="search" data-mini="true" placeholder="Search&hellip;" id="search-box">
@@ -45,24 +46,61 @@
                 <h4>Browse by System</h4>
             </header>
 
-            <div data-role="collapsible">
-                <h3>Show Systems</h3>
-                <ul id="affectedSystems" data-role="controlgroup">
-                    <li><a href="#" data-ajax="false" data-role="button" data-theme="a" data-icon="arrow-r" data-iconpos="right">PS3</a></li>
-                    <li><a href="#" data-ajax="false" data-role="button" data-theme="a" data-icon="arrow-r" data-iconpos="right">XBox</a></li>
-                    <li><a href="#" data-ajax="false" data-role="button" data-theme="a" data-icon="arrow-r" data-iconpos="right">PC</a></li>
-                    <li><a href="#" data-ajax="false" data-role="button" data-theme="a" data-icon="arrow-r" data-iconpos="right">Wii-U</a></li>
-                    <li><a href="#" data-ajax="false" data-role="button" data-theme="a" data-icon="arrow-r" data-iconpos="right">Wii</a></li>
-                    <li><a href="#" data-ajax="false" data-role="button" data-theme="a" data-icon="arrow-r" data-iconpos="right">DS</a></li>
-                </ul>
+            <div class="ui-grid-b">
+                <div title="xbox" class="ui-block-a">
+                    <div class="ui-bar ui-bar-c">
+                        <img src="img/xbox.png" alt="Xbox">
+                        <p>XBox</p>
+                    </div>
+                </div>
+
+                <div title="ps3" class="ui-block-b" class="ui-bar ui-bar-e">
+                    <div  class="ui-bar ui-bar-c">
+                        <img src="img/ps3.png" alt="PS3">
+                        <p>PS3</p>
+                    </div>
+
+                </div>
+
+                <div title="pc" class="ui-block-c" class="ui-bar ui-bar-e">
+                    <div  class="ui-bar ui-bar-c">
+                        <img src="img/pc.png" alt="PC">
+                        <p>PC</p>
+                    </div>
+
+                </div>
+
+                <div title="wii" class="ui-block-a" class="ui-bar ui-bar-e">
+                    <div  class="ui-bar ui-bar-c">
+                        <img src="img/wii.png" alt="Wii">
+                        <p>Wii</p>
+                    </div>
+
+                </div>
+
+                <div title="wii-u" class="ui-block-b" class="ui-bar ui-bar-e">
+                    <div  class="ui-bar ui-bar-c">
+                        <img src="img/wii-u.png" alt="Wii-U">
+                        <p>Wii-U</p>
+                    </div>
+
+                </div>
+
+                <div title="ds" class="ui-block-c" class="ui-bar ui-bar-e">
+                    <div  class="ui-bar ui-bar-c">
+                        <img src="img/ds.png" alt="DS">
+                        <p>DS</p>
+                    </div>
+                </div>
             </div>
+
         </section>
     </div><!-- home page -->
 
     <!-- Add Item Page -->
-    <div id="add-or-edit" data-role="page" data-add-back-btn="true" data-theme="b">
+    <div id="add-or-edit" data-role="page" data-add-back-btn="true" data-theme="c">
         <header data-role="header">
-            <h1>Add / Update Cheat Code</h1>
+            <h3>Add / Update Cheat Code<span class="branding"></span></h3>
         </header>
 
         <form id="cheat-form" method="post">
@@ -88,7 +126,7 @@
                     <!-- Affected game systems -->
                     <div data-role="fieldcontain">
                         <label class="form-label">Affected Game System(s):</label>
-                        <select title="Systems" id="systems" name="systems" data-native-menu="false" data-placeholder="true" multiple>
+                        <select title="Systems" id="systems" name="systems"  data-placeholder="true" multiple>
                             <option>&ndash;&ndash; Choose &ndash;&ndash;</option>
                             <option value="xbox">XBox</option>
                             <option value="ps3">PS3</option>
@@ -142,16 +180,16 @@
         </form>
     </div><!-- add item page -->
 
-    <div data-role="page" id="show" data-add-back-btn="true" data-theme="b">
+    <div data-role="page" id="show" data-add-back-btn="true" data-theme="c">
         <!-- Display Section -->
         <section>
             <header data-role="header">
-                <h3>Stored Cheats</h3>
+                <h3>Stored Cheats<span class="branding"></span></h3>
             </header>
 
             <nav data-role="navbar">
                 <ul>
-                    <li><a id="clear-storage" href="#" title="Delete All Stored Cheats">Clear Stored Cheats</a></li>
+                    <li><a id="clear-storage" href="#" data-ajax="false" title="Delete All Stored Cheats">Clear Stored Cheats</a></li>
                 </ul>
             </nav>
 
@@ -161,9 +199,10 @@
         </section>
     </div><!-- stored cheats page -->
 
-    <div id="about" data-role="page" data-add-back-btn="true" data-theme="b">
+    <div id="about" data-role="page" data-add-back-btn="true" data-theme="c">
         <header data-role="header">
-            <h3>About</h3>
+            <h3>About<span class="branding"></span></h3>
+
         </header>
 
         <br />
@@ -221,9 +260,9 @@
         </section>
     </div><!-- about page -->
 
-    <div id="news" data-role="page" data-add-back-btn="true" data-theme="b">
+    <div id="news" data-role="page" data-add-back-btn="true" data-theme="c">
         <header data-role="header">
-            <h3>Newsstand</h3>
+            <h3>Newsstand<span class="branding"></span></h3>
         </header>
 
         <article>

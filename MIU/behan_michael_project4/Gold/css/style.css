@@ -10,7 +10,7 @@
 }
 
 .ui-bar {
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(98%,rgba(175,79,35,1)), color-stop(5%,rgba(96,56,19,1)));
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(5%,rgba(175,79,35,1)), color-stop(98%,rgba(96,56,19,1)));
     color: #FFF;
     text-shadow: #000 1px 1px 2px;
     border: 1px solid #333;
@@ -23,6 +23,27 @@
 
 div[data-role=fieldcontain] {
     clear: both;
+}
+
+nav[data-role=navbar] li.ui-block-a,
+nav[data-role=navbar] li.ui-block-a a,
+nav[data-role=navbar] li.ui-block-b,
+nav[data-role=navbar] li.ui-block-b a,
+nav[data-role=navbar] li.ui-block-c,
+nav[data-role=navbar] li.ui-block-c a,
+nav[data-role=navbar] li.ui-block-d,
+nav[data-role=navbar] li.ui-block-d a {
+    border-right: 1px solid #333;
+}
+
+div[data-role=page] > header h3 span.branding { /* all headers except Home page */
+    display: inline-block;
+    width: 33px;
+    height: 33px;
+    background: #FFFF24 url("../img/brand.png") no-repeat 0 0;
+    position: absolute;
+    right: 3px;
+    top: 3px;
 }
 
 #feature img {
@@ -60,13 +81,18 @@ section {
 #add-or-edit span.hint {
     display: block;
     font-size: 0.8em;
-    color: rgb(70, 70, 70);
+    color: rgb(190, 190, 190);
     margin-top: 5px;
+}
+
+#about[data-role=content] {
+    display: block;
+    padding: 1em;
 }
 
 #about p {
     display: block;
-    padding: 1em;
+    margin-bottom: 1em;
 }
 
 #news article {
@@ -81,7 +107,7 @@ section {
 
 #display span.match {
     color: rgb(42, 42, 42);
-    background-color: rgb(236, 228, 97);
+    background-color: #FFFCDB;
 }
 
 #display article.entry {

@@ -9,7 +9,7 @@
     // (Combats undesired FOUC effects)
     $('body').show();
 
-    var $validator = $('#cheat-form').validate({
+    var validation = {
        rules:{
            game:{
                required: true
@@ -18,9 +18,6 @@
                required: true
            },
            systems: {
-               required: true
-           },
-           code:{
                required: true
            },
            author:{
@@ -46,9 +43,6 @@
            systems:{
                required: "Please choose at least 1 system."
            },
-           code:{
-               required: "Please enter a code or N/A."
-           },
            author:{
                required: "Please enter your name."
            },
@@ -62,7 +56,7 @@
                required: "Please enter the date on which this was found."
            }
        }
-    });
+    };
 
     // Define variables
     var CATEGORY_ID = 'category',
@@ -253,7 +247,7 @@
             }
         }
 
-        $.mobile.changePage($("#add-or-edit"), "slide", true, true);
+        $.mobile.changePage($("#add-or-edit"));
     };
 
 
@@ -301,7 +295,9 @@
             for (o in data[i]) {
                 $dl = $('<dl/>');
 
-                if (o === 'key') {
+                if (o === 'undefined') {
+                    continue;
+                } else if (o === 'key') {
                     // Handle 'key'
                     $article.attr('id', ('entry-' + data[i][o]));
                 } else if (o === 'category') {
@@ -364,6 +360,9 @@
             $article.append($deleteButton);
             $display.append($article);
 
+            // Refresh all JQM elements
+            $display.trigger('create');
+
         } // end object loop
     };
 
@@ -371,12 +370,24 @@
     // Set event bindings for various elements.
     var setupEvents = function() {
 
-        $('input[type="reset"]').click(function() {
-            window.scrollTo(0,0);
+        $('div[data-role=page] span.branding').click(function() {
+            $.mobile.changePage('#home');
         });
 
-        $('#browse h3').click(function() {
-            $('html, body').animate({scrollTop: $(document).height()});
+        // Refresh JQM enhancements whenever a page is initialized
+        $('div[data-role="page"]').on('pageinit', function() {
+            $(this).trigger('create');
+        });
+
+        $('input[type="reset"]').click(function() {
+            $('html,body').animate({
+               scrollTop: 0
+            }, 'fast');
+        });
+
+        $('#browse div[title]').click(function() {
+            displayStoredCheats($(this).attr('title'));
+            $.mobile.changePage($('#show'));
         });
 
         $('#add-or-edit').on('pageshow', function() {
@@ -391,12 +402,37 @@
             });
         });
 
+        $('#category').on('change', function() {
+            $this = $(this);
+
+            // Only require code if category 'cheatcode'
+            // has been selected.
+            if ($this.val() === 'cheatcode') {
+                validation.rules.code = {
+                    required: true
+                };
+                $('#code').closest('div').show();
+            } else {
+                validation.rules.code = {
+                    required: false
+                };
+                validation.messages.code = {
+                    required: 'Please enter a code.'
+                };
+
+                $('#code').closest('div').hide();
+            }
+        });
+
         $('#cheat-form').on('submit', function(evt) {
            evt.preventDefault();
+
+           $('#cheat-form').validate(validation);
+
            if ($(this).valid()) {
                storeCheat();
                displayStoredCheats();
-               $.mobile.changePage($('#show'), 'slide', true, true);
+               $.mobile.changePage($('#show'));
                return false;
            }
         });
@@ -413,22 +449,17 @@
                     $value.html().replace(text, '<span class="match">' + text + '</span>')
                 );
             });
-            $.mobile.changePage($('#show'), 'slide', true, true);
+            $.mobile.changePage($('#show'));
             return false;
-        });
-
-        $('ul#affectedSystems li a').on('click', function(evt) {
-            evt.preventDefault();
-            var system = $(this).find('span.ui-btn-text').html().toLowerCase();
-            displayStoredCheats(system, null);
-            $.mobile.changePage($('#show'), 'slide', true, true);
         });
 
         $('#clear-storage').click(function(evt) {
             evt.preventDefault();
-            localStorage.clear();
-            alert('All cheat codes have been deleted.');
-            displayStoredCheats();
+            if (window.confirm('Are you sure you wish to delete all stored data?')) {
+                localStorage.clear();
+                alert('All cheat codes have been deleted.');
+                displayStoredCheats();
+            }
         });
     };
 
@@ -469,22 +500,30 @@
                 {
                     href: '#home',
                     icon: 'home',
-                    text: 'Home'
+                    text: 'Home',
+                    'data-ajax': false,
+                    'data-transition': 'slidefade'
                 },
                 {
                     href: '#add-or-edit',
                     icon: 'plus',
-                    text: 'Add'
+                    text: 'Add',
+                    'data-ajax': false,
+                    'data-transition': 'slidefade'
                 },
                 {
                     href: '#about',
                     icon: 'info',
-                    text: 'About'
+                    text: 'About',
+                    'data-ajax': false,
+                    'data-transition': 'slidefade'
                 },
                 {
                     href: '#news',
                     icon: 'check',
-                    text: 'News'
+                    text: 'News',
+                    'data-ajax': false,
+                    'data-transition': 'slidefade'
                 }
             ],
             i = 0,

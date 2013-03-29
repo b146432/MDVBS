@@ -9,13 +9,18 @@
     padding: 0;
 }
 
-.ui-header .ui-title {
-    margin-right: 10%;
-    margin-left: 10%;
-}
-
 div[data-role=fieldcontain] {
     clear: both;
+}
+
+div[data-role=page] > header h3 span.branding { /* all headers except Home page */
+    display: inline-block;
+    width: 33px;
+    height: 33px;
+    background: #FFFF24 url("../img/brand.png") no-repeat 0 0;
+    position: absolute;
+    right: 3px;
+    top: 3px;
 }
 
 #feature img {
@@ -27,22 +32,23 @@ section {
     margin-bottom: 1.5em;
 }
 
-#systems figure {
-    margin: 20px;
-    width: 44px;
+#browse div.ui-grid-b {
+    margin-top: 1px;
+}
+
+#browse div.ui-bar img {
+    display: block;
     height: 44px;
+    width: 44px;
+    margin: 0 auto;
 }
 
-#systems figure figcaption {
-    width: 100%;
+#browse div.ui-bar p {
+    display: block;
+    width: 44px;
+    margin: 0 auto;
     text-align: center;
-    margin-top: -20px;
-}
-
-#systems figure img  {
-    width: 100%;
-    height: auto;
-    margin: 10px;
+    padding-top: 4px;
 }
 
 #add-or-edit legend {
@@ -52,7 +58,7 @@ section {
 #add-or-edit span.hint {
     display: block;
     font-size: 0.8em;
-    color: rgb(70, 70, 70);
+    color: rgb(190, 190, 190);
     margin-top: 5px;
 }
 
@@ -73,7 +79,7 @@ section {
 
 #display span.match {
     color: rgb(42, 42, 42);
-    background-color: rgb(236, 228, 97);
+    background-color: #FFFCDB;
 }
 
 #display article.entry {

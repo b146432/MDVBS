@@ -9,7 +9,7 @@
     // (Combats undesired FOUC effects)
     $('body').show();
 
-    var $validator = $('#cheat-form').validate({
+    var validation = {
        rules:{
            game:{
                required: true
@@ -18,9 +18,6 @@
                required: true
            },
            systems: {
-               required: true
-           },
-           code:{
                required: true
            },
            author:{
@@ -46,9 +43,6 @@
            systems:{
                required: "Please choose at least 1 system."
            },
-           code:{
-               required: "Please enter a code or N/A."
-           },
            author:{
                required: "Please enter your name."
            },
@@ -62,7 +56,7 @@
                required: "Please enter the date on which this was found."
            }
        }
-    });
+    };
 
     // Define variables
     var CATEGORY_ID = 'category',
@@ -247,13 +241,15 @@
                 $('#description').html(data[o]);
             } else if (o === 'thorough') {
                 $('#thorough option[value="' + data[o] + '"]').attr('selected', true);
+            } else if (o === 'category') {
+                $('#category option[value="' + data[o] + '"]').attr('selected', true);
             } else {
                 // Handle all other fields:
                 $('#' + o).attr('value', data[o]);
             }
         }
 
-        $.mobile.changePage($("#add-or-edit"), "slide", true, true);
+        $.mobile.changePage($("#add-or-edit"));
     };
 
 
@@ -376,13 +372,24 @@
     // Set event bindings for various elements.
     var setupEvents = function() {
 
+        $('div[data-role=page] span.branding').click(function() {
+            $.mobile.changePage('#home');
+        });
+
+        // Refresh JQM enhancements whenever a page is initialized
+        $('div[data-role="page"]').on('pageinit', function() {
+            $(this).trigger('create');
+        });
+
         $('input[type="reset"]').click(function() {
-            window.scrollTo(0,0);
+            $('html,body').animate({
+               scrollTop: 0
+            }, 'fast');
         });
 
         $('#browse div[title]').click(function() {
             displayStoredCheats($(this).attr('title'));
-            $.mobile.changePage($('#show'), 'slide', true, true);
+            $.mobile.changePage($('#show'));
         });
 
         $('#add-or-edit').on('pageshow', function() {
@@ -397,12 +404,37 @@
             });
         });
 
+        $('#category').on('change', function() {
+            $this = $(this);
+
+            // Only require code if category 'cheatcode'
+            // has been selected.
+            if ($this.val() === 'cheatcode') {
+                validation.rules.code = {
+                    required: true
+                };
+                $('#code').closest('div').show();
+            } else {
+                validation.rules.code = {
+                    required: false
+                };
+                validation.messages.code = {
+                    required: 'Please enter a code.'
+                };
+
+                $('#code').closest('div').hide();
+            }
+        });
+
         $('#cheat-form').on('submit', function(evt) {
            evt.preventDefault();
+
+           $('#cheat-form').validate(validation);
+
            if ($(this).valid()) {
                storeCheat();
                displayStoredCheats();
-               $.mobile.changePage($('#show'), 'slide', true, true);
+               $.mobile.changePage($('#show'));
                return false;
            }
         });
@@ -419,7 +451,7 @@
                     $value.html().replace(text, '<span class="match">' + text + '</span>')
                 );
             });
-            $.mobile.changePage($('#show'), 'slide', true, true);
+            $.mobile.changePage($('#show'));
             return false;
         });
 
@@ -471,25 +503,29 @@
                     href: '#home',
                     icon: 'home',
                     text: 'Home',
-                    'data-ajax': false
+                    'data-ajax': false,
+                    'data-transition': 'slidefade'
                 },
                 {
                     href: '#add-or-edit',
                     icon: 'plus',
                     text: 'Add',
-                    'data-ajax': false
+                    'data-ajax': false,
+                    'data-transition': 'slidefade'
                 },
                 {
                     href: '#about',
                     icon: 'info',
                     text: 'About',
-                    'data-ajax': false
+                    'data-ajax': false,
+                    'data-transition': 'slidefade'
                 },
                 {
                     href: '#news',
                     icon: 'check',
                     text: 'News',
-                    'data-ajax': false
+                    'data-ajax': false,
+                    'data-transition': 'slidefade'
                 }
             ],
             i = 0,
