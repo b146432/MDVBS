@@ -3,7 +3,7 @@
 // Michael Behan
 
 // Auto-executing closure
-(function($) {
+$(document).live('mobileinit'), function() {
 
     // Show Body
     // (Combats undesired FOUC effects)
@@ -393,7 +393,7 @@
         });
 
         $('#add-or-edit').on('pageshow', function() {
-            $('#cheat-form').get(0).reset();
+            $(this).find('input[type="select"]').selectmenu('refresh', true);
         });
 
         $(FORM_FIELDS).each(function(idx, value) {
@@ -563,4 +563,4 @@
        loadNavigationInPage($(val));
     });
 
-})(jQuery);
+};
